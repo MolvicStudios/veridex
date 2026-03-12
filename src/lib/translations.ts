@@ -212,7 +212,8 @@ export const translations = {
 			loading: 'Cargando noticias...',
 			error: 'No se pudieron cargar las noticias',
 			noNews: 'Sin noticias disponibles',
-			source: 'Fuente'
+			source: 'Fuente',
+			refreshBtn: 'Otras noticias'
 		},
 		howItWorks: {
 			title: 'Cómo funciona',
@@ -495,7 +496,8 @@ export const translations = {
 			loading: 'Loading news...',
 			error: 'Could not load news',
 			noNews: 'No news available',
-			source: 'Source'
+			source: 'Source',
+			refreshBtn: 'More news'
 		},
 		howItWorks: {
 			title: 'How it works',

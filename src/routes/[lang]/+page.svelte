@@ -53,9 +53,11 @@
 		}, 50);
 	}
 
-	onMount(async () => {
+	async function fetchNews() {
+		newsLoading = true;
+		newsError = false;
 		try {
-			const res = await fetch(`/api/news?lang=${lang}`);
+			const res = await fetch(`/api/news?lang=${lang}&_=${Date.now()}`);
 			if (res.ok) {
 				const data = await res.json();
 				newsItems = data.items ?? [];
@@ -67,7 +69,9 @@
 		} finally {
 			newsLoading = false;
 		}
-	});
+	}
+
+	onMount(() => { fetchNews(); });
 
 	const schema = $derived(JSON.stringify({
 		'@context': 'https://schema.org',
@@ -164,6 +168,7 @@
 		loading={newsLoading}
 		error={newsError}
 		onVerify={onVerifyNews}
+		onRefresh={fetchNews}
 	/>
 </section>
 

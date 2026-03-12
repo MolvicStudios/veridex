@@ -8,13 +8,15 @@
 		items = [],
 		loading = false,
 		error = false,
-		onVerify
+		onVerify,
+		onRefresh
 	}: {
 		lang: Lang;
 		items?: NewsItem[];
 		loading?: boolean;
 		error?: boolean;
 		onVerify: (item: NewsItem) => void;
+		onRefresh: () => void;
 	} = $props();
 
 	const t = $derived(getT(lang));
@@ -29,9 +31,16 @@
 				<span class="w-1 h-5 rounded-full bg-gradient-to-b from-blue-500 to-cyan-500"></span>
 				<h2 class="text-xl font-bold">{n.title}</h2>
 			</div>
-			<p class="text-slate-500 dark:text-slate-400 text-sm pl-3">{n.subtitle}</p>
+			<div class="text-sm pl-3 text-slate-500 dark:text-slate-400">{n.subtitle}</div>
 		</div>
-		<div class="text-2xl animate-pulse">📡</div>
+		<button
+			onclick={onRefresh}
+			disabled={loading}
+			class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition disabled:opacity-50"
+		>
+			<span class="{loading ? 'animate-spin' : ''}">🔄</span>
+			{n.refreshBtn}
+		</button>
 	</div>
 
 	{#if loading}

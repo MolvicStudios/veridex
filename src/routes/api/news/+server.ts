@@ -2,21 +2,42 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { NewsItem } from '../../../types/analysis.js';
 
-// Multiple sources per language for variety
+// Multiple sources per language — worldwide variety
 const SOURCES_EN = [
-	{ url: 'https://feeds.bbci.co.uk/news/world/rss.xml', name: 'BBC News' },
-	{ url: 'https://feeds.bbci.co.uk/news/technology/rss.xml', name: 'BBC Tech' },
+	// US
 	{ url: 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml', name: 'NY Times' },
+	{ url: 'https://feeds.washingtonpost.com/rss/world', name: 'Washington Post' },
+	{ url: 'https://feeds.npr.org/1004/rss.xml', name: 'NPR World' },
+	// UK
+	{ url: 'https://feeds.bbci.co.uk/news/world/rss.xml', name: 'BBC News' },
 	{ url: 'https://www.theguardian.com/world/rss', name: 'The Guardian' },
-	{ url: 'https://feeds.reuters.com/reuters/topNews', name: 'Reuters' }
+	{ url: 'https://feeds.bbci.co.uk/news/technology/rss.xml', name: 'BBC Tech' },
+	// Wire services
+	{ url: 'https://feeds.reuters.com/reuters/topNews', name: 'Reuters' },
+	// Asia-Pacific
+	{ url: 'https://www3.nhk.or.jp/nhkworld/en/news/rss/index.xml', name: 'NHK World' },
+	{ url: 'https://www.aljazeera.com/xml/rss/all.xml', name: 'Al Jazeera' },
+	// Europe
+	{ url: 'https://www.dw.com/rss/en/top-stories/rss-en-all', name: 'DW News' },
+	{ url: 'https://www.france24.com/en/rss', name: 'France 24' },
+	// Africa/Americas
+	{ url: 'https://www.abc.net.au/news/feed/2942460/rss.xml', name: 'ABC Australia' }
 ];
 
 const SOURCES_ES = [
+	// España
 	{ url: 'https://ep00.epimg.net/rss/elpais/portada.xml', name: 'El País' },
 	{ url: 'https://www.elmundo.es/rss/portada.xml', name: 'El Mundo' },
-	{ url: 'https://feeds.bbci.co.uk/mundo/rss.xml', name: 'BBC Mundo' },
 	{ url: 'https://www.20minutos.es/rss/', name: '20minutos' },
-	{ url: 'https://www.rtve.es/api/noticias.rss', name: 'RTVE' }
+	{ url: 'https://www.rtve.es/api/noticias.rss', name: 'RTVE' },
+	// Latinoamérica
+	{ url: 'https://www.infobae.com/feeds/rss/', name: 'Infobae' },
+	{ url: 'https://rss.eluniversal.com.mx/rss.xml', name: 'El Universal MX' },
+	{ url: 'https://rss.dw.com/xml/rss-es-all', name: 'DW Español' },
+	// Internacional en español
+	{ url: 'https://feeds.bbci.co.uk/mundo/rss.xml', name: 'BBC Mundo' },
+	{ url: 'https://www.france24.com/es/rss', name: 'France 24 ES' },
+	{ url: 'https://cnnespanol.cnn.com/feed/', name: 'CNN Español' }
 ];
 
 function parseRSS(xml: string, fallbackSource: string): NewsItem[] {
@@ -81,13 +102,24 @@ async function fetchSource(url: string, name: string, perSource: number): Promis
 	}
 }
 
+/** Shuffle array in place (Fisher-Yates) */
+function shuffle<T>(arr: T[]): T[] {
+	for (let i = arr.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[arr[i], arr[j]] = [arr[j], arr[i]];
+	}
+	return arr;
+}
+
 export const GET: RequestHandler = async ({ url }) => {
 	const lang = (url.searchParams.get('lang') ?? 'es') as 'es' | 'en';
-	const sources = lang === 'es' ? SOURCES_ES : SOURCES_EN;
+	const allSources = lang === 'es' ? [...SOURCES_ES] : [...SOURCES_EN];
 
-	// Fetch first 3 sources in parallel, 3 items each = up to 9 varied items
+	// Randomly pick 4 sources each time for variety on refresh
+	const picked = shuffle(allSources).slice(0, 4);
+
 	const results = await Promise.all(
-		sources.slice(0, 3).map(s => fetchSource(s.url, s.name, 3))
+		picked.map(s => fetchSource(s.url, s.name, 3))
 	);
 
 	// Interleave: take 1 from each source in round-robin for max variety
@@ -99,10 +131,11 @@ export const GET: RequestHandler = async ({ url }) => {
 		}
 	}
 
-	// If we got nothing, try remaining sources as fallback
+	// If we got nothing, try more sources as fallback
 	let items = interleaved;
 	if (items.length === 0) {
-		for (const s of sources.slice(3)) {
+		const remaining = allSources.filter(s => !picked.includes(s));
+		for (const s of remaining) {
 			items = await fetchSource(s.url, s.name, 9);
 			if (items.length > 0) break;
 		}
@@ -110,6 +143,6 @@ export const GET: RequestHandler = async ({ url }) => {
 
 	return json(
 		{ items },
-		{ headers: { 'Cache-Control': 'public, max-age=900, s-maxage=900' } }
+		{ headers: { 'Cache-Control': 'public, max-age=120, s-maxage=120' } }
 	);
 };
