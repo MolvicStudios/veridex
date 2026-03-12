@@ -10,8 +10,7 @@ export const translations = {
 		hero: {
 			badge: 'Impulsado por IA',
 			title: '¿Es real esta noticia?',
-			subtitle: 'Analiza cualquier noticia con IA. Detectamos desinformación, contenido generado por IA y sesgos editoriales en segundos.',
-			tabUrl: 'Por URL',
+			subtitle: 'Analiza cualquier noticia con IA. Detectamos desinformación, contenido generado por IA y sesgos editoriales en segundos.',				disclaimer: '⚠️ Los resultados son estimaciones de IA. Utiliza siempre el pensamiento crítico.',			tabUrl: 'Por URL',
 			tabText: 'Pegar texto',
 			urlPlaceholder: 'https://ejemplo.com/noticia...',
 			textPlaceholder: 'Pega aquí el texto completo de la noticia que quieres analizar...',
@@ -210,8 +209,7 @@ export const translations = {
 		hero: {
 			badge: 'AI-powered',
 			title: 'Is this news real?',
-			subtitle: 'Analyze any news article with AI. We detect disinformation, AI-generated content and editorial bias in seconds.',
-			tabUrl: 'By URL',
+			subtitle: 'Analyze any news article with AI. We detect disinformation, AI-generated content and editorial bias in seconds.',				disclaimer: '⚠️ Results are AI estimates. Always apply critical thinking.',			tabUrl: 'By URL',
 			tabText: 'Paste text',
 			urlPlaceholder: 'https://example.com/article...',
 			textPlaceholder: 'Paste the full text of the article you want to analyze...',

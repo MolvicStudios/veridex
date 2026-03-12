@@ -2,13 +2,22 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { NewsItem } from '../../../types/analysis.js';
 
-// Cache for 15 minutes (edge cache header)
-const SOURCES = {
-	en: 'https://feeds.bbci.co.uk/news/world/rss.xml',
-	es: 'https://ep00.epimg.net/rss/elpais/portada.xml'
-};
+// Multiple sources per language for variety
+const SOURCES_EN = [
+	{ url: 'https://feeds.bbci.co.uk/news/world/rss.xml', name: 'BBC News' },
+	{ url: 'https://feeds.bbci.co.uk/news/technology/rss.xml', name: 'BBC Tech' },
+	{ url: 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml', name: 'NY Times' },
+	{ url: 'https://www.theguardian.com/world/rss', name: 'The Guardian' },
+	{ url: 'https://feeds.reuters.com/reuters/topNews', name: 'Reuters' }
+];
 
-const FALLBACK_ES = 'https://feeds.bbci.co.uk/mundo/rss.xml';
+const SOURCES_ES = [
+	{ url: 'https://ep00.epimg.net/rss/elpais/portada.xml', name: 'El País' },
+	{ url: 'https://www.elmundo.es/rss/portada.xml', name: 'El Mundo' },
+	{ url: 'https://feeds.bbci.co.uk/mundo/rss.xml', name: 'BBC Mundo' },
+	{ url: 'https://www.20minutos.es/rss/', name: '20minutos' },
+	{ url: 'https://www.rtve.es/api/noticias.rss', name: 'RTVE' }
+];
 
 function parseRSS(xml: string, fallbackSource: string): NewsItem[] {
 	const items: NewsItem[] = [];
@@ -58,45 +67,49 @@ function parseRSS(xml: string, fallbackSource: string): NewsItem[] {
 	return items;
 }
 
+async function fetchSource(url: string, name: string, perSource: number): Promise<NewsItem[]> {
+	try {
+		const res = await fetch(url, {
+			headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Veridex/1.0)' },
+			signal: AbortSignal.timeout(6000)
+		});
+		if (!res.ok) return [];
+		const items = parseRSS(await res.text(), name);
+		return items.slice(0, perSource);
+	} catch {
+		return [];
+	}
+}
+
 export const GET: RequestHandler = async ({ url }) => {
 	const lang = (url.searchParams.get('lang') ?? 'es') as 'es' | 'en';
-	const primaryUrl = SOURCES[lang];
-	const fallback = lang === 'es' ? FALLBACK_ES : SOURCES.en;
-	const sourceName = lang === 'es' ? 'El País' : 'BBC News';
-	const fallbackName = lang === 'es' ? 'BBC Mundo' : 'BBC News';
+	const sources = lang === 'es' ? SOURCES_ES : SOURCES_EN;
 
-	let items: NewsItem[] = [];
+	// Fetch first 3 sources in parallel, 3 items each = up to 9 varied items
+	const results = await Promise.all(
+		sources.slice(0, 3).map(s => fetchSource(s.url, s.name, 3))
+	);
 
-	// Try primary
-	try {
-		const res = await fetch(primaryUrl, {
-			headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Veridex/1.0)' },
-			signal: AbortSignal.timeout(8000)
-		});
-		if (res.ok) {
-			items = parseRSS(await res.text(), sourceName);
+	// Interleave: take 1 from each source in round-robin for max variety
+	const interleaved: NewsItem[] = [];
+	const maxLen = Math.max(...results.map(r => r.length));
+	for (let i = 0; i < maxLen && interleaved.length < 9; i++) {
+		for (const arr of results) {
+			if (arr[i] && interleaved.length < 9) interleaved.push(arr[i]);
 		}
-	} catch { /* try fallback */ }
+	}
 
-	// Try fallback if primary failed or returned nothing
-	if (items.length === 0 && fallback !== primaryUrl) {
-		try {
-			const res = await fetch(fallback, {
-				headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Veridex/1.0)' },
-				signal: AbortSignal.timeout(8000)
-			});
-			if (res.ok) {
-				items = parseRSS(await res.text(), fallbackName);
-			}
-		} catch { /* give up */ }
+	// If we got nothing, try remaining sources as fallback
+	let items = interleaved;
+	if (items.length === 0) {
+		for (const s of sources.slice(3)) {
+			items = await fetchSource(s.url, s.name, 9);
+			if (items.length > 0) break;
+		}
 	}
 
 	return json(
 		{ items },
-		{
-			headers: {
-				'Cache-Control': 'public, max-age=900, s-maxage=900'
-			}
-		}
+		{ headers: { 'Cache-Control': 'public, max-age=900, s-maxage=900' } }
 	);
 };
