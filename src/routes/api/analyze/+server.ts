@@ -1,6 +1,7 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { analyzeWithUserKey, analyzeWithEnvKey, analyzeMultiModel, extractJSON } from '$lib/ai.js';
+import type { ProviderType } from '$lib/ai.js';
 import { env } from '$env/dynamic/private';
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -39,7 +40,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 			// Primary provider
 			calls.push({
-				provider: (provider as 'groq' | 'mistral' | 'openai' | 'google') ?? 'groq',
+				provider: (provider as ProviderType) ?? 'groq',
 				apiKey: userKey!.trim(),
 				model: model ?? 'llama-3.3-70b-versatile',
 				content: content.trim()
@@ -49,7 +50,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			for (const [p, cfg] of Object.entries(extraKeys)) {
 				if (cfg.key?.trim() && p !== provider) {
 					calls.push({
-						provider: p as 'groq' | 'mistral' | 'openai' | 'google',
+						provider: p as ProviderType,
 						apiKey: cfg.key.trim(),
 						model: cfg.model,
 						content: content.trim()
@@ -72,7 +73,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		if (hasOwnKey) {
 			// Single model with user key
 			rawJson = await analyzeWithUserKey({
-				provider: (provider as 'groq' | 'mistral' | 'openai' | 'google') ?? 'groq',
+				provider: (provider as ProviderType) ?? 'groq',
 				apiKey: userKey!.trim(),
 				model: model ?? 'llama-3.3-70b-versatile',
 				content: content.trim()

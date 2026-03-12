@@ -61,7 +61,7 @@ function createCounterStore() {
 export const dailyCount = createCounterStore();
 
 // ── API key settings ───────────────────────────────────────────────────────
-export type ProviderId = 'groq' | 'mistral' | 'openai' | 'google';
+export type ProviderId = 'groq' | 'mistral' | 'openai' | 'google' | 'anthropic' | 'xai' | 'deepseek';
 
 export interface ProviderConfig {
 	key: string;
@@ -74,6 +74,9 @@ export interface ApiKeySettings {
 	mistral: ProviderConfig;
 	openai: ProviderConfig;
 	google: ProviderConfig;
+	anthropic: ProviderConfig;
+	xai: ProviderConfig;
+	deepseek: ProviderConfig;
 }
 
 const API_KEY_DEFAULTS: ApiKeySettings = {
@@ -81,7 +84,10 @@ const API_KEY_DEFAULTS: ApiKeySettings = {
 	groq: { key: '', model: 'llama-3.3-70b-versatile' },
 	mistral: { key: '', model: 'mistral-small-latest' },
 	openai: { key: '', model: 'gpt-4o-mini' },
-	google: { key: '', model: 'gemini-2.0-flash' }
+	google: { key: '', model: 'gemini-2.0-flash' },
+	anthropic: { key: '', model: 'claude-3-5-haiku-20241022' },
+	xai: { key: '', model: 'grok-3-mini' },
+	deepseek: { key: '', model: 'deepseek-chat' }
 };
 
 function createApiKeyStore() {

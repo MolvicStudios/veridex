@@ -86,12 +86,18 @@
 <svelte:head>
 	<title>{t.meta.title}</title>
 	<meta name="description" content={t.meta.description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Veridex" />
 	<meta property="og:title" content={t.meta.title} />
 	<meta property="og:description" content={t.meta.description} />
 	<meta property="og:url" content="https://veridex.quest/{lang}" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content={t.meta.title} />
+	<meta name="twitter:description" content={t.meta.description} />
 	<link rel="canonical" href="https://veridex.quest/{lang}" />
 	<link rel="alternate" hreflang="es" href="https://veridex.quest/es" />
 	<link rel="alternate" hreflang="en" href="https://veridex.quest/en" />
+	<link rel="alternate" hreflang="x-default" href="https://veridex.quest/es" />
 	<!-- JSON-LD structured data -->
 	{@html '<script type="application/ld+json">' + schema + '<\/script>'}
 </svelte:head>
@@ -145,6 +151,9 @@
 	<section id="result-section" class="container-app py-4 pb-12 fade-up">
 		<ResultPanel {result} {lang} {onNewAnalysis} />
 	</section>
+
+	<!-- Ad after result -->
+	<div class="container-app"><AdBanner /></div>
 {/if}
 
 <!-- News Research section -->
@@ -175,6 +184,9 @@
 		</div>
 	</div>
 </section>
+
+<!-- Ad after how it works -->
+<div class="container-app"><AdBanner /></div>
 
 <!-- About / Technology -->
 <section class="container-app py-14">

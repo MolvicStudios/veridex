@@ -161,7 +161,7 @@
 				<span class="font-medium text-slate-700 dark:text-slate-300">{t.scores.bias}</span>
 				<span class="text-xs font-semibold text-blue-500">{biasLabel}</span>
 			</div>
-			<div class="relative h-3 rounded-full bg-gradient-to-r from-blue-600 via-slate-200 to-red-500 dark:via-slate-700">
+			<div class="relative h-3 rounded-full bg-gradient-to-r from-red-500 via-slate-200 to-blue-600 dark:via-slate-700">
 				<div
 					class="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-400 shadow transition-all duration-700"
 					style="left: calc({((result.bias_score + 100) / 200) * 100}% - 8px)"

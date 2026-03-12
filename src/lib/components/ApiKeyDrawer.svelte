@@ -12,15 +12,21 @@ let keys = $state({
 groq: $apiKeyStore.groq.key,
 mistral: $apiKeyStore.mistral.key,
 openai: $apiKeyStore.openai.key,
-google: $apiKeyStore.google.key
+google: $apiKeyStore.google.key,
+anthropic: $apiKeyStore.anthropic.key,
+xai: $apiKeyStore.xai.key,
+deepseek: $apiKeyStore.deepseek.key
 });
 let models = $state({
 groq: $apiKeyStore.groq.model,
 mistral: $apiKeyStore.mistral.model,
 openai: $apiKeyStore.openai.model,
-google: $apiKeyStore.google.model
+google: $apiKeyStore.google.model,
+anthropic: $apiKeyStore.anthropic.model,
+xai: $apiKeyStore.xai.model,
+deepseek: $apiKeyStore.deepseek.model
 });
-let showKeys = $state({ groq: false, mistral: false, openai: false, google: false });
+let showKeys = $state({ groq: false, mistral: false, openai: false, google: false, anthropic: false, xai: false, deepseek: false });
 let activeProvider = $state<ProviderId>($apiKeyStore.activeProvider);
 let toast = $state('');
 
@@ -30,13 +36,19 @@ keys = {
 groq: $apiKeyStore.groq.key,
 mistral: $apiKeyStore.mistral.key,
 openai: $apiKeyStore.openai.key,
-google: $apiKeyStore.google.key
+google: $apiKeyStore.google.key,
+anthropic: $apiKeyStore.anthropic.key,
+xai: $apiKeyStore.xai.key,
+deepseek: $apiKeyStore.deepseek.key
 };
 models = {
 groq: $apiKeyStore.groq.model,
 mistral: $apiKeyStore.mistral.model,
 openai: $apiKeyStore.openai.model,
-google: $apiKeyStore.google.model
+google: $apiKeyStore.google.model,
+anthropic: $apiKeyStore.anthropic.model,
+xai: $apiKeyStore.xai.model,
+deepseek: $apiKeyStore.deepseek.model
 };
 activeProvider = $apiKeyStore.activeProvider;
 }
@@ -69,7 +81,7 @@ setTimeout(() => (toast = ''), 3000);
 
 function close() { apiDrawerOpen.set(false); }
 
-const providers: ProviderId[] = ['groq', 'mistral', 'openai', 'google'];
+const providers: ProviderId[] = ['groq', 'mistral', 'openai', 'google', 'anthropic', 'xai', 'deepseek'];
 const savedCount = $derived(providers.filter(p => $apiKeyStore[p].key.trim()).length);
 </script>
 

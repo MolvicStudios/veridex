@@ -25,6 +25,8 @@
 				<p class="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3">{t.footer.links}</p>
 				<ul class="space-y-1.5 text-sm text-slate-600 dark:text-slate-400">
 					<li><a href="/{lang}" class="hover:text-blue-500 transition">{t.nav.home}</a></li>
+					<li><a href="/{lang}#analyze-section" class="hover:text-blue-500 transition">{t.nav.analyze}</a></li>
+					<li><a href="https://github.com/MolvicStudios/veridex" target="_blank" rel="noopener noreferrer" class="hover:text-blue-500 transition">GitHub</a></li>
 				</ul>
 			</div>
 

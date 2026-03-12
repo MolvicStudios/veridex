@@ -6,6 +6,7 @@
 	let { lang }: { lang: Lang } = $props();
 	const t = $derived(getT(lang));
 	const hasOwnKey = $derived($apiKeyStore[$apiKeyStore.activeProvider].key.trim().length > 0);
+	let mobileOpen = $state(false);
 </script>
 
 <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/60 dark:border-slate-800/60">
@@ -16,7 +17,7 @@
 			<span class="hidden sm:block">Veridex<span class="text-slate-400 font-normal text-sm">.quest</span></span>
 		</a>
 
-		<!-- Nav -->
+		<!-- Desktop Nav -->
 		<nav class="hidden md:flex items-center gap-5 text-sm text-slate-600 dark:text-slate-400">
 			<a href="/{lang}" class="hover:text-slate-900 dark:hover:text-white transition">{t.nav.home}</a>
 			<a href="/{lang}/privacy" class="hover:text-slate-900 dark:hover:text-white transition">{t.nav.privacy}</a>
@@ -58,6 +59,27 @@
 			>
 				{$theme === 'dark' ? '☀️' : '🌙'}
 			</button>
+
+			<!-- Mobile menu toggle -->
+			<button
+				onclick={() => mobileOpen = !mobileOpen}
+				class="md:hidden w-8 h-8 rounded-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition text-lg"
+				aria-label="Toggle menu"
+			>
+				{mobileOpen ? '✕' : '☰'}
+			</button>
 		</div>
 	</div>
+
+	<!-- Mobile Nav -->
+	{#if mobileOpen}
+		<nav class="md:hidden border-t border-slate-200/60 dark:border-slate-800/60 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md">
+			<div class="container-app py-3 flex flex-col gap-2 text-sm text-slate-600 dark:text-slate-400">
+				<a href="/{lang}" onclick={() => mobileOpen = false} class="py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">{t.nav.home}</a>
+				<a href="/{lang}/privacy" onclick={() => mobileOpen = false} class="py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">{t.nav.privacy}</a>
+				<a href="/{lang}/cookies" onclick={() => mobileOpen = false} class="py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">{t.nav.cookies}</a>
+				<a href="/{lang}/terms" onclick={() => mobileOpen = false} class="py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">{t.nav.terms}</a>
+			</div>
+		</nav>
+	{/if}
 </header>

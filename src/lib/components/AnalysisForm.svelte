@@ -53,7 +53,7 @@
 
 	// Count how many providers have a key saved (for precise mode availability)
 	const configuredProviders = $derived(
-		(['groq', 'mistral', 'openai', 'google'] as const).filter(p => $apiKeyStore[p].key.trim())
+		(['groq', 'mistral', 'openai', 'google', 'anthropic', 'xai', 'deepseek'] as const).filter(p => $apiKeyStore[p].key.trim())
 	);
 	const canPrecise = $derived(hasOwnKey && configuredProviders.length >= 2);
 
@@ -105,7 +105,7 @@
 					body.mode = 'precise';
 					// Pass all configured providers' keys so the server can call them in parallel
 					const extraKeys: Record<string, { key: string; model: string }> = {};
-					for (const p of ['groq', 'mistral', 'openai', 'google'] as const) {
+					for (const p of ['groq', 'mistral', 'openai', 'google', 'anthropic', 'xai', 'deepseek'] as const) {
 						if ($apiKeyStore[p].key.trim()) {
 							extraKeys[p] = { key: $apiKeyStore[p].key, model: $apiKeyStore[p].model };
 						}

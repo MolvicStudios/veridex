@@ -6,7 +6,7 @@ export const translations = {
 			title: 'Veridex — Verifica cualquier noticia con IA',
 			description: 'Analiza la fiabilidad de noticias con inteligencia artificial. Detecta fake news, contenido generado por IA y sesgos editoriales.'
 		},
-		nav: { home: 'Inicio', privacy: 'Privacidad', cookies: 'Cookies', terms: 'Términos', by: 'por' },
+		nav: { home: 'Inicio', analyze: 'Analizar', privacy: 'Privacidad', cookies: 'Cookies', terms: 'Términos', by: 'por' },
 		hero: {
 			badge: 'Impulsado por IA',
 			title: '¿Es real esta noticia?',
@@ -100,7 +100,7 @@ export const translations = {
 			provider: 'Proveedor',
 			model: 'Modelo',
 			apiKeyLabel: 'Clave API',
-			apiKeyPlaceholder: 'gsk_... / sk-... / sk-or-...',
+			apiKeyPlaceholder: 'gsk_... / sk-... / sk-ant-...',
 			showKey: 'Mostrar', hideKey: 'Ocultar',
 			saveBtn: 'Guardar y activar',
 			clearBtn: 'Borrar clave',
@@ -127,6 +127,21 @@ export const translations = {
 					name: 'Google AI', description: 'Gemini 2.0 Flash, Pro y más. Tier gratuito disponible.',
 					url: 'https://aistudio.google.com/apikey', urlText: 'aistudio.google.com',
 					steps: ['Entra en aistudio.google.com', 'Haz clic en "Create API Key"', 'Copia y pega aquí']
+				},
+				anthropic: {
+					name: 'Anthropic', description: 'Claude 3.5, Claude 4. Razonamiento avanzado.',
+					url: 'https://console.anthropic.com/settings/keys', urlText: 'console.anthropic.com',
+					steps: ['Crea cuenta en console.anthropic.com', 'Ve a "API Keys" → "Create Key"', 'Añade crédito en Billing', 'Copia y pega aquí']
+				},
+				xai: {
+					name: 'xAI', description: 'Grok 3. Modelos de xAI/Twitter.',
+					url: 'https://console.x.ai', urlText: 'console.x.ai',
+					steps: ['Crea cuenta en console.x.ai', 'Ve a "API Keys" → "Create API Key"', 'Copia y pega aquí']
+				},
+				deepseek: {
+					name: 'DeepSeek', description: 'DeepSeek V3/R1. Modelos chinos de alto rendimiento.',
+					url: 'https://platform.deepseek.com/api_keys', urlText: 'platform.deepseek.com',
+					steps: ['Crea cuenta en platform.deepseek.com', 'Ve a "API Keys" → "Create new key"', 'Añade crédito', 'Copia y pega aquí']
 				}
 			},
 			models: {
@@ -169,6 +184,23 @@ export const translations = {
 					{ id: 'gemini-2.0-flash-thinking-exp', name: 'Gemini 2.0 Flash Thinking', free: true },
 					{ id: 'gemma-3-27b-it', name: 'Gemma 3 27B', free: true },
 					{ id: 'gemma-3-12b-it', name: 'Gemma 3 12B', free: true }
+				],
+				anthropic: [
+					{ id: 'claude-3-5-haiku-20241022', name: 'Claude 3.5 Haiku — Recomendado 💳', free: false },
+					{ id: 'claude-3-5-sonnet-20241022', name: 'Claude 3.5 Sonnet 💳', free: false },
+					{ id: 'claude-sonnet-4-20250514', name: 'Claude Sonnet 4 💳', free: false },
+					{ id: 'claude-3-haiku-20240307', name: 'Claude 3 Haiku 💳', free: false },
+					{ id: 'claude-3-opus-20240229', name: 'Claude 3 Opus 💳', free: false }
+				],
+				xai: [
+					{ id: 'grok-3-mini', name: 'Grok 3 Mini — Recomendado 💳', free: false },
+					{ id: 'grok-3', name: 'Grok 3 💳', free: false },
+					{ id: 'grok-2', name: 'Grok 2 💳', free: false },
+					{ id: 'grok-3-mini-fast', name: 'Grok 3 Mini Fast 💳', free: false }
+				],
+				deepseek: [
+					{ id: 'deepseek-chat', name: 'DeepSeek V3 — Recomendado 💳', free: false },
+					{ id: 'deepseek-reasoner', name: 'DeepSeek R1 💳', free: false }
 				]
 			}
 		},
@@ -194,12 +226,12 @@ export const translations = {
 			title: 'Tecnología y transparencia',
 			subtitle: 'Qué hay detrás de cada análisis',
 			cards: [
-				{ icon: '🧠', title: 'Modelos de IA líderes', description: 'Usamos Llama 3.3 70B (Groq), Mistral Small, GPT-4o (OpenAI) y Gemini 2.0 Flash (Google). En modo Preciso, varios modelos analizan en paralelo y sus resultados se promedian.' },
+				{ icon: '🧠', title: 'Modelos de IA líderes', description: 'Usamos Llama 3.3 70B (Groq), Mistral Small, GPT-4o (OpenAI), Gemini 2.0 Flash (Google), Claude 3.5 (Anthropic), Grok 3 (xAI) y DeepSeek V3. En modo Preciso, varios modelos analizan en paralelo y sus resultados se promedian.' },
 				{ icon: '🔍', title: 'Metodología clara', description: 'Evaluamos consistencia factual, corroboración con fuentes conocidas, indicadores de sesgo editorial y patrones de escritura generada por IA. Ningún modelo decide solo.' },
 				{ icon: '🔒', title: 'Sin datos almacenados', description: 'Veridex no guarda artículos ni resultados. El contenido viaja directamente a la API de IA y el informe vuelve a tu navegador, sin pasar por nuestros servidores.' }
 			],
 			stats: [
-				{ value: '4', label: 'proveedores de IA' },
+				{ value: '7', label: 'proveedores de IA' },
 				{ value: '0', label: 'datos guardados' },
 				{ value: '∞', label: 'análisis con tu clave' },
 				{ value: '<10s', label: 'por análisis' }
@@ -221,7 +253,7 @@ export const translations = {
 				{ title: '1. Responsable del tratamiento', content: 'MolvicStudios.pro es el responsable del tratamiento de los datos. Contacto: molvicstudios@outlook.com' },
 				{ title: '2. Datos que recopilamos', content: 'Veridex no requiere registro ni recoge datos personales identificables. Los únicos datos procesados son el texto o URL que el usuario introduce voluntariamente para su análisis, los cuales son enviados a modelos de IA de terceros para generar el informe y no son almacenados en nuestros servidores.' },
 				{ title: '3. Uso de cookies', content: 'Usamos cookies técnicas esenciales para el funcionamiento del sitio (preferencias de tema e idioma, contador de análisis diarios). Con tu consentimiento, también usamos cookies de terceros de Google AdSense para mostrar publicidad relevante. Consulta nuestra Política de Cookies para más detalle.' },
-				{ title: '4. Servicios de terceros', content: 'Para el análisis de contenido usamos las APIs de Groq Inc., Mistral AI, OpenAI y Google. Para la publicidad usamos Google AdSense. Para la extracción de URLs usamos el servicio público Jina Reader. Cada uno tiene su propia política de privacidad.' },
+				{ title: '4. Servicios de terceros', content: 'Para el análisis de contenido usamos las APIs de Groq Inc., Mistral AI, OpenAI, Google, Anthropic, xAI y DeepSeek. Para la publicidad usamos Google AdSense. Para la extracción de URLs usamos el servicio público Jina Reader. Cada uno tiene su propia política de privacidad.' },
 				{ title: '5. Base legal del tratamiento', content: 'El tratamiento se basa en el interés legítimo del servicio (análisis solicitado por el usuario) y en el consentimiento explícito para las cookies no esenciales.' },
 				{ title: '6. Transferencias internacionales', content: 'Los modelos de IA pueden procesar datos en servidores ubicados fuera del Espacio Económico Europeo. Estas transferencias están amparadas por cláusulas contractuales estándar.' },
 				{ title: '7. Derechos del usuario', content: 'Tienes derecho a acceder, rectificar, suprimir y portabilidad de tus datos, así como a oponerte o limitar su tratamiento. Para ejercerlos, contacta con nosotros en molvicstudios@outlook.com' },
@@ -257,7 +289,7 @@ export const translations = {
 			title: 'Veridex — Verify any news with AI',
 			description: 'Analyze news reliability with artificial intelligence. Detect fake news, AI-generated content and editorial bias.'
 		},
-		nav: { home: 'Home', privacy: 'Privacy', cookies: 'Cookies', terms: 'Terms', by: 'by' },
+		nav: { home: 'Home', analyze: 'Analyze', privacy: 'Privacy', cookies: 'Cookies', terms: 'Terms', by: 'by' },
 		hero: {
 			badge: 'AI-powered',
 			title: 'Is this news real?',
@@ -378,6 +410,21 @@ export const translations = {
 					name: 'Google AI', description: 'Gemini 2.0 Flash, Pro and more. Free tier available.',
 					url: 'https://aistudio.google.com/apikey', urlText: 'aistudio.google.com',
 					steps: ['Go to aistudio.google.com', 'Click "Create API Key"', 'Copy and paste here']
+				},
+				anthropic: {
+					name: 'Anthropic', description: 'Claude 3.5, Claude 4. Advanced reasoning.',
+					url: 'https://console.anthropic.com/settings/keys', urlText: 'console.anthropic.com',
+					steps: ['Create account at console.anthropic.com', 'Go to "API Keys" → "Create Key"', 'Add credit in Billing', 'Copy and paste here']
+				},
+				xai: {
+					name: 'xAI', description: 'Grok 3. xAI/Twitter models.',
+					url: 'https://console.x.ai', urlText: 'console.x.ai',
+					steps: ['Create account at console.x.ai', 'Go to "API Keys" → "Create API Key"', 'Copy and paste here']
+				},
+				deepseek: {
+					name: 'DeepSeek', description: 'DeepSeek V3/R1. High-performance Chinese models.',
+					url: 'https://platform.deepseek.com/api_keys', urlText: 'platform.deepseek.com',
+					steps: ['Create account at platform.deepseek.com', 'Go to "API Keys" → "Create new key"', 'Add credit', 'Copy and paste here']
 				}
 			},
 			models: {
@@ -420,6 +467,23 @@ export const translations = {
 					{ id: 'gemini-2.0-flash-thinking-exp', name: 'Gemini 2.0 Flash Thinking', free: true },
 					{ id: 'gemma-3-27b-it', name: 'Gemma 3 27B', free: true },
 					{ id: 'gemma-3-12b-it', name: 'Gemma 3 12B', free: true }
+				],
+				anthropic: [
+					{ id: 'claude-3-5-haiku-20241022', name: 'Claude 3.5 Haiku — Recommended 💳', free: false },
+					{ id: 'claude-3-5-sonnet-20241022', name: 'Claude 3.5 Sonnet 💳', free: false },
+					{ id: 'claude-sonnet-4-20250514', name: 'Claude Sonnet 4 💳', free: false },
+					{ id: 'claude-3-haiku-20240307', name: 'Claude 3 Haiku 💳', free: false },
+					{ id: 'claude-3-opus-20240229', name: 'Claude 3 Opus 💳', free: false }
+				],
+				xai: [
+					{ id: 'grok-3-mini', name: 'Grok 3 Mini — Recommended 💳', free: false },
+					{ id: 'grok-3', name: 'Grok 3 💳', free: false },
+					{ id: 'grok-2', name: 'Grok 2 💳', free: false },
+					{ id: 'grok-3-mini-fast', name: 'Grok 3 Mini Fast 💳', free: false }
+				],
+				deepseek: [
+					{ id: 'deepseek-chat', name: 'DeepSeek V3 — Recommended 💳', free: false },
+					{ id: 'deepseek-reasoner', name: 'DeepSeek R1 💳', free: false }
 				]
 			}
 		},
@@ -445,12 +509,12 @@ export const translations = {
 			title: 'Technology & transparency',
 			subtitle: "What's behind every analysis",
 			cards: [
-				{ icon: '🧠', title: 'Leading AI models', description: 'We use Llama 3.3 70B (Groq), Mistral Small, GPT-4o (OpenAI) and Gemini 2.0 Flash (Google). In Precise mode, multiple models run in parallel and results are averaged.' },
+				{ icon: '🧠', title: 'Leading AI models', description: 'We use Llama 3.3 70B (Groq), Mistral Small, GPT-4o (OpenAI), Gemini 2.0 Flash (Google), Claude 3.5 (Anthropic), Grok 3 (xAI) and DeepSeek V3. In Precise mode, multiple models run in parallel and results are averaged.' },
 				{ icon: '🔍', title: 'Clear methodology', description: 'We evaluate factual consistency, corroboration with known sources, editorial bias markers and patterns typical of AI-generated writing. No single model decides alone.' },
 				{ icon: '🔒', title: 'No data stored', description: 'Veridex stores no article or result. Content goes directly to the AI API and the report comes back to your browser, without passing through our servers.' }
 			],
 			stats: [
-				{ value: '4', label: 'AI providers' },
+				{ value: '7', label: 'AI providers' },
 				{ value: '0', label: 'data saved' },
 				{ value: '∞', label: 'analyses with your key' },
 				{ value: '<10s', label: 'per analysis' }
@@ -472,7 +536,7 @@ export const translations = {
 				{ title: '1. Data controller', content: 'MolvicStudios.pro is the data controller. Contact: molvicstudios@outlook.com' },
 				{ title: '2. Data we collect', content: 'Veridex does not require registration or collect personally identifiable data. The only data processed is the text or URL voluntarily submitted by the user for analysis, which is sent to third-party AI models to generate the report and is not stored on our servers.' },
 				{ title: '3. Use of cookies', content: 'We use essential technical cookies for site functionality (theme preferences, language, daily analysis counter). With your consent, we also use third-party Google AdSense cookies to display relevant advertising. See our Cookie Policy for details.' },
-				{ title: '4. Third-party services', content: 'For content analysis we use the APIs of Groq Inc., Mistral AI, OpenAI and Google. For advertising we use Google AdSense. For URL extraction we use the public Jina Reader service. Each has its own privacy policy.' },
+				{ title: '4. Third-party services', content: 'For content analysis we use the APIs of Groq Inc., Mistral AI, OpenAI, Google, Anthropic, xAI and DeepSeek. For advertising we use Google AdSense. For URL extraction we use the public Jina Reader service. Each has its own privacy policy.' },
 				{ title: '5. Legal basis', content: 'Processing is based on the legitimate interest of the service (analysis requested by the user) and explicit consent for non-essential cookies.' },
 				{ title: '6. International transfers', content: 'AI models may process data on servers located outside the European Economic Area. Such transfers are covered by standard contractual clauses.' },
 				{ title: '7. Your rights', content: 'You have the right to access, rectify, erase and obtain portability of your data, as well as to object or restrict its processing. To exercise these rights contact us at molvicstudios@outlook.com' },
