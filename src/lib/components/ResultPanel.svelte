@@ -17,7 +17,19 @@
 
 	const t = $derived(getT(lang));
 	const summary = $derived(lang === 'es' ? result.summary_es : result.summary_en);
-	const biasLabel = $derived((t.biasLabels as Record<string, string>)[result.bias_label] ?? result.bias_label);
+
+	// Derive bias label from score to guarantee consistency (AI sometimes returns mismatched label/score)
+	function biasLabelFromScore(score: number): string {
+		if (score <= -60) return 'Far Left';
+		if (score <= -25) return 'Left';
+		if (score <= -10) return 'Center-Left';
+		if (score < 10) return 'Center';
+		if (score < 25) return 'Center-Right';
+		if (score < 60) return 'Right';
+		return 'Far Right';
+	}
+	const derivedBiasKey = $derived(biasLabelFromScore(result.bias_score));
+	const biasLabel = $derived((t.biasLabels as Record<string, string>)[derivedBiasKey] ?? derivedBiasKey);
 
 	// Multi-model metadata
 	const modelsUsed = $derived(result.models_used ?? []);
