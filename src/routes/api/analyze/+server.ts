@@ -1,7 +1,7 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { analyzeWithUserKey, analyzeWithEnvKey, extractJSON } from '$lib/ai.js';
-import { GROQ_API_KEY, OPENROUTER_API_KEY, AI_PROVIDER } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 export const POST: RequestHandler = async ({ request }) => {
 	let body: {
@@ -39,9 +39,9 @@ export const POST: RequestHandler = async ({ request }) => {
 			// Server key
 			rawJson = await analyzeWithEnvKey(
 				content.trim(),
-				GROQ_API_KEY ?? '',
-				OPENROUTER_API_KEY ?? '',
-				AI_PROVIDER ?? 'groq'
+				env.GROQ_API_KEY ?? '',
+				env.OPENROUTER_API_KEY ?? '',
+				env.AI_PROVIDER ?? 'groq'
 			);
 		}
 
