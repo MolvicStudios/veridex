@@ -182,14 +182,19 @@ CALIBRATION: Be honest and critical. Low scores for unverified claims. High ai_g
 };
 
 // Provider-specific user message templates (some models respond better to different framing)
-const USER_PROMPTS: Record<string, (snippet: string) => string> = {
-	groq: (s) => `Analyze this news article thoroughly — check facts, detect AI authorship, assess bias — and return the JSON:\n\n${s}`,
-	mistral: (s) => `Analyze this article. Return ONLY the JSON object, starting with { — no other text:\n\n${s}`,
-	openai: (s) => `Perform a comprehensive fact-check and AI detection analysis on this news article. Return the JSON assessment:\n\n${s}`,
-	google: (s) => `Analyze this news article and return ONLY the JSON object (start with {, end with }):\n\n${s}`,
-	anthropic: (s) => `Please analyze this news article for credibility, AI authorship, and bias. Return only the JSON assessment:\n\n${s}`,
-	xai: (s) => `Analyze this article. JSON output only, no commentary:\n\n${s}`,
-	deepseek: (s) => `Analyze this news article. Respond with ONLY the JSON object:\n\n${s}`
+const LANG_INSTRUCTION: Record<string, string> = {
+	es: 'IMPORTANT: Write ALL text fields (summary_es, summary_en, key_claims, red_flags, positive_signals) — key_claims, red_flags, and positive_signals MUST be in SPANISH.',
+	en: 'IMPORTANT: Write ALL text fields (summary_es, summary_en, key_claims, red_flags, positive_signals) — key_claims, red_flags, and positive_signals MUST be in ENGLISH.'
+};
+
+const USER_PROMPTS: Record<string, (snippet: string, lang: string) => string> = {
+	groq: (s, lang) => `${LANG_INSTRUCTION[lang] ?? LANG_INSTRUCTION.en}\n\nAnalyze this news article thoroughly — check facts, detect AI authorship, assess bias — and return the JSON:\n\n${s}`,
+	mistral: (s, lang) => `${LANG_INSTRUCTION[lang] ?? LANG_INSTRUCTION.en}\n\nAnalyze this article. Return ONLY the JSON object, starting with { — no other text:\n\n${s}`,
+	openai: (s, lang) => `${LANG_INSTRUCTION[lang] ?? LANG_INSTRUCTION.en}\n\nPerform a comprehensive fact-check and AI detection analysis on this news article. Return the JSON assessment:\n\n${s}`,
+	google: (s, lang) => `${LANG_INSTRUCTION[lang] ?? LANG_INSTRUCTION.en}\n\nAnalyze this news article and return ONLY the JSON object (start with {, end with }):\n\n${s}`,
+	anthropic: (s, lang) => `${LANG_INSTRUCTION[lang] ?? LANG_INSTRUCTION.en}\n\nPlease analyze this news article for credibility, AI authorship, and bias. Return only the JSON assessment:\n\n${s}`,
+	xai: (s, lang) => `${LANG_INSTRUCTION[lang] ?? LANG_INSTRUCTION.en}\n\nAnalyze this article. JSON output only, no commentary:\n\n${s}`,
+	deepseek: (s, lang) => `${LANG_INSTRUCTION[lang] ?? LANG_INSTRUCTION.en}\n\nAnalyze this news article. Respond with ONLY the JSON object:\n\n${s}`
 };
 
 export function extractJSON(text: string): string {
@@ -216,14 +221,15 @@ export interface AICallOptions {
 	apiKey: string;
 	model: string;
 	content: string;
+	lang?: string;
 }
 
 // ── Provider call with user key ────────────────────────────────────────────
 export async function analyzeWithUserKey(opts: AICallOptions): Promise<string> {
-	const { provider, apiKey, model, content } = opts;
+	const { provider, apiKey, model, content, lang = 'en' } = opts;
 	const snippet = content.slice(0, 8000);
 	const systemPrompt = PROVIDER_PROMPTS[provider] ?? PROVIDER_PROMPTS.groq;
-	const userPrompt = (USER_PROMPTS[provider] ?? USER_PROMPTS.groq)(snippet);
+	const userPrompt = (USER_PROMPTS[provider] ?? USER_PROMPTS.groq)(snippet, lang);
 
 	// Anthropic uses a different API format
 	if (provider === 'anthropic') {
@@ -391,12 +397,14 @@ export async function analyzeMultiModel(calls: AICallOptions[]): Promise<{
 // ── Server-side call with env key ──────────────────────────────────────────
 export async function analyzeWithEnvKey(
 	content: string,
-	envGroq: string
+	envGroq: string,
+	lang = 'en'
 ): Promise<string> {
 	return analyzeWithUserKey({
 		provider: 'groq',
 		apiKey: envGroq,
 		model: 'llama-3.3-70b-versatile',
-		content
+		content,
+		lang
 	});
 }

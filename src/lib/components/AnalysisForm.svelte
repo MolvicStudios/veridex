@@ -93,7 +93,8 @@
 			const activeProvider = $apiKeyStore.activeProvider;
 			const body: Record<string, unknown> = {
 				content: articleContent,
-				url: tab === 'url' ? content : undefined
+				url: tab === 'url' ? content : undefined,
+				lang
 			};
 
 			if (hasOwnKey) {

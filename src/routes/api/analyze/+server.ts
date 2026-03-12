@@ -12,6 +12,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		provider?: string;
 		model?: string;
 		mode?: 'fast' | 'precise';
+		lang?: string;
 		extraKeys?: Record<string, { key: string; model: string }>;
 	};
 
@@ -21,7 +22,8 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(400, 'Invalid JSON');
 	}
 
-	const { content, url, userKey, provider, model, mode, extraKeys } = body;
+	const { content, url, userKey, provider, model, mode, lang, extraKeys } = body;
+	const safeLang = lang === 'es' || lang === 'en' ? lang : 'en';
 
 	if (!content || typeof content !== 'string' || content.trim().length < 50) {
 		throw error(400, 'Content too short');
@@ -43,7 +45,8 @@ export const POST: RequestHandler = async ({ request }) => {
 				provider: (provider as ProviderType) ?? 'groq',
 				apiKey: userKey!.trim(),
 				model: model ?? 'llama-3.3-70b-versatile',
-				content: content.trim()
+				content: content.trim(),
+				lang: safeLang
 			});
 
 			// Additional providers from extraKeys
@@ -53,7 +56,8 @@ export const POST: RequestHandler = async ({ request }) => {
 						provider: p as ProviderType,
 						apiKey: cfg.key.trim(),
 						model: cfg.model,
-						content: content.trim()
+						content: content.trim(),
+						lang: safeLang
 					});
 				}
 			}
@@ -76,14 +80,16 @@ export const POST: RequestHandler = async ({ request }) => {
 				provider: (provider as ProviderType) ?? 'groq',
 				apiKey: userKey!.trim(),
 				model: model ?? 'llama-3.3-70b-versatile',
-				content: content.trim()
+				content: content.trim(),
+				lang: safeLang
 			});
 			modelsUsed = [`${provider ?? 'groq'}/${model ?? 'llama-3.3-70b-versatile'}`];
 		} else {
 			// Server key (free tier) — always single, always Groq
 			rawJson = await analyzeWithEnvKey(
 				content.trim(),
-				env.GROQ_API_KEY ?? ''
+				env.GROQ_API_KEY ?? '',
+				safeLang
 			);
 			modelsUsed = [`groq/llama-3.3-70b-versatile`];
 		}
