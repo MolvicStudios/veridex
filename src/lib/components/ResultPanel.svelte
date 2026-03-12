@@ -19,6 +19,15 @@
 	const summary = $derived(lang === 'es' ? result.summary_es : result.summary_en);
 	const biasLabel = $derived((t.biasLabels as Record<string, string>)[result.bias_label] ?? result.bias_label);
 
+	// Multi-model metadata
+	const modelsUsed = $derived(result.models_used ?? []);
+	const isConsensus = $derived(modelsUsed.length > 1);
+	const scoreRanges = $derived(result.score_ranges ?? {});
+	// Disagreement = any key score spread >= 20 points
+	const hasDisagreement = $derived(
+		isConsensus && Object.values(scoreRanges).some(r => (r.max - r.min) >= 20)
+	);
+
 	let shareCopied = $state(false);
 
 	function share() {
@@ -56,6 +65,22 @@
 				>{result.article_url}</a>
 			{/if}
 			<p class="text-xs text-slate-400">{t.results.analyzedAt}: {formatDate(result.analyzed_at, lang)}</p>
+
+			<!-- Models used badge -->
+			{#if isConsensus}
+				<div class="flex flex-wrap gap-1 mt-1">
+					{#each modelsUsed as m}
+						<span class="text-xs px-1.5 py-0.5 rounded-full bg-purple-500/10 text-purple-500 border border-purple-500/20 font-mono">{m.split('/')[0]}</span>
+					{/each}
+				</div>
+			{:else if modelsUsed.length === 1}
+				<p class="text-xs text-slate-400">{t.results.analyzedWith}: <span class="font-mono text-slate-500">{modelsUsed[0]}</span></p>
+			{/if}
+
+			<!-- Disagreement warning -->
+			{#if hasDisagreement}
+				<p class="text-xs text-amber-500 flex items-center gap-1">⚠️ {t.results.modelDisagreement}</p>
+			{/if}
 		</div>
 
 		<!-- Actions -->

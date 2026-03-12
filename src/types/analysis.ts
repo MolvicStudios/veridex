@@ -26,6 +26,8 @@ export interface AnalysisResult {
 	positive_signals: string[];
 	analyzed_at: string;
 	article_url?: string;
+	models_used?: string[];
+	score_ranges?: Record<string, { min: number; max: number }>;
 }
 
 export interface NewsItem {

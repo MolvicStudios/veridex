@@ -20,6 +20,7 @@
 	let loading = $state(false);
 	let error = $state('');
 	let phase = $state<'idle' | 'fetching' | 'analyzing'>('idle');
+	let mode = $state<'fast' | 'precise'>('fast');
 
 	// Pre-fill from news item
 	export function prefillUrl(u: string) {
@@ -34,6 +35,12 @@
 	const hasOwnKey = $derived($apiKeyStore[$apiKeyStore.activeProvider].key.trim().length > 0);
 	const remaining = $derived(FREE_LIMIT - $dailyCount);
 	const limitReached = $derived(!hasOwnKey && $dailyCount >= FREE_LIMIT);
+
+	// Count how many providers have a key saved (for precise mode availability)
+	const configuredProviders = $derived(
+		(['groq', 'mistral', 'openrouter'] as const).filter(p => $apiKeyStore[p].key.trim())
+	);
+	const canPrecise = $derived(hasOwnKey && configuredProviders.length >= 2);
 
 	async function analyze() {
 		error = '';
@@ -64,15 +71,28 @@
 			}
 
 			phase = 'analyzing';
+			const activeProvider = $apiKeyStore.activeProvider;
 			const body: Record<string, unknown> = {
 				content: articleContent,
 				url: tab === 'url' ? content : undefined
 			};
 
 			if (hasOwnKey) {
-				body.userKey = $apiKeyStore[$apiKeyStore.activeProvider].key;
-				body.provider = $apiKeyStore.activeProvider;
-				body.model = $apiKeyStore[$apiKeyStore.activeProvider].model;
+				body.userKey = $apiKeyStore[activeProvider].key;
+				body.provider = activeProvider;
+				body.model = $apiKeyStore[activeProvider].model;
+
+				if (mode === 'precise' && canPrecise) {
+					body.mode = 'precise';
+					// Pass all configured providers' keys so the server can call them in parallel
+					const extraKeys: Record<string, { key: string; model: string }> = {};
+					for (const p of ['groq', 'mistral', 'openrouter'] as const) {
+						if ($apiKeyStore[p].key.trim()) {
+							extraKeys[p] = { key: $apiKeyStore[p].key, model: $apiKeyStore[p].model };
+						}
+					}
+					body.extraKeys = extraKeys;
+				}
 			}
 
 			const res = await fetch('/api/analyze', {
@@ -101,7 +121,9 @@
 
 	const btnLabel = $derived(
 		phase === 'fetching' ? t.hero.fetching :
+		phase === 'analyzing' && mode === 'precise' ? t.hero.analyzingPrecise :
 		phase === 'analyzing' ? t.hero.analyzing :
+		mode === 'precise' ? t.hero.analyzeBtnPrecise :
 		t.hero.analyzeBtn
 	);
 </script>
@@ -166,6 +188,31 @@
 		<p class="text-sm text-red-500 flex items-center gap-1.5">⚠️ {error}</p>
 	{/if}
 
+	<!-- Mode selector (only shown when ≥2 providers configured) -->
+	{#if canPrecise}
+		<div class="flex items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+			<div class="flex rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden text-xs font-medium flex-shrink-0">
+				<button
+					onclick={() => (mode = 'fast')}
+					class="px-3 py-1.5 transition {mode === 'fast'
+						? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
+						: 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 bg-transparent'}"
+				>{t.hero.modeFast}</button>
+				<button
+					onclick={() => (mode = 'precise')}
+					class="px-3 py-1.5 transition border-l border-slate-200 dark:border-slate-700 {mode === 'precise'
+						? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
+						: 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 bg-transparent'}"
+				>{t.hero.modePrecise}</button>
+			</div>
+			{#if mode === 'precise'}
+				<p class="text-xs text-slate-400 leading-tight">{t.hero.modePreciseHint} ({configuredProviders.length} proveedores)</p>
+			{:else}
+				<p class="text-xs text-slate-400">{configuredProviders.length} proveedores configurados</p>
+			{/if}
+		</div>
+	{/if}
+
 	<!-- Submit -->
 	<button
 		onclick={analyze}
@@ -173,7 +220,7 @@
 		class="w-full btn-primary py-3.5 text-base"
 	>
 		{#if loading}
-			<span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+			<span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block mr-2"></span>
 		{/if}
 		{btnLabel}
 	</button>

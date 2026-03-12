@@ -97,9 +97,10 @@
 				{t.hero.title}
 			</h1>
 			<p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto text-lg leading-relaxed">{t.hero.subtitle}</p>
-					<p class="mt-3 text-xs text-amber-600 dark:text-amber-400 font-medium">{t.hero.disclaimer}</p>
+				<p class="mt-3 text-xs text-amber-600 dark:text-amber-400 font-medium">{t.hero.disclaimer}</p>
+			</div>
 
-		<!-- Form card -->
+			<!-- Form card -->
 		<div bind:this={formSection} id="analyze-section" class="card p-6 max-w-2xl mx-auto shadow-xl">
 			<AnalysisForm bind:this={formRef} {lang} {onResult} />
 		</div>

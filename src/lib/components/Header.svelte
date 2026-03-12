@@ -5,7 +5,7 @@
 
 	let { lang }: { lang: Lang } = $props();
 	const t = $derived(getT(lang));
-	const hasOwnKey = $derived($apiKeyStore.key.trim().length > 0);
+	const hasOwnKey = $derived($apiKeyStore[$apiKeyStore.activeProvider].key.trim().length > 0);
 </script>
 
 <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/60 dark:border-slate-800/60">

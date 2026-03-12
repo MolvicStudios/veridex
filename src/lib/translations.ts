@@ -15,8 +15,13 @@ export const translations = {
 			urlPlaceholder: 'https://ejemplo.com/noticia...',
 			textPlaceholder: 'Pega aquí el texto completo de la noticia que quieres analizar...',
 			analyzeBtn: 'Analizar noticia',
+			analyzeBtnPrecise: 'Analizar con consenso',
 			analyzing: 'Analizando...',
-			fetching: 'Obteniendo artículo...'
+			analyzingPrecise: 'Consultando varios modelos...',
+			fetching: 'Obteniendo artículo...',
+			modeFast: '⚡ Rápido',
+			modePrecise: '🔬 Preciso',
+			modePreciseHint: 'Usa todos tus proveedores en paralelo y promedia resultados'
 		},
 		limits: {
 			title: 'Límite diario alcanzado',
@@ -82,7 +87,9 @@ export const translations = {
 			positiveSignals: 'Señales positivas', shareBtn: 'Compartir', shareCopied: '¡Enlace copiado!',
 			newAnalysis: 'Nuevo análisis', analyzedAt: 'Analizado el', noRedFlags: 'Sin señales de alarma',
 			noPositiveSignals: 'Sin señales positivas', unknown: 'Desconocida', sourceReputation: 'Fuente no identificada',
-			corroborationOf: 'de 5 fuentes'
+			corroborationOf: 'de 5 fuentes',
+			analyzedWith: 'Analizado con',
+			modelDisagreement: 'Los modelos no coincidieron del todo — resultado menos seguro'
 		},
 		apiDrawer: {
 			title: 'Tu clave API',
@@ -225,8 +232,13 @@ export const translations = {
 			urlPlaceholder: 'https://example.com/article...',
 			textPlaceholder: 'Paste the full text of the article you want to analyze...',
 			analyzeBtn: 'Analyze article',
+			analyzeBtnPrecise: 'Analyze with consensus',
 			analyzing: 'Analyzing...',
-			fetching: 'Fetching article...'
+			analyzingPrecise: 'Querying multiple models...',
+			fetching: 'Fetching article...',
+			modeFast: '⚡ Fast',
+			modePrecise: '🔬 Precise',
+			modePreciseHint: 'Uses all your providers in parallel and averages results'
 		},
 		limits: {
 			title: 'Daily limit reached',
@@ -292,7 +304,9 @@ export const translations = {
 			positiveSignals: 'Positive signals', shareBtn: 'Share', shareCopied: 'Link copied!',
 			newAnalysis: 'New analysis', analyzedAt: 'Analyzed on', noRedFlags: 'No red flags detected',
 			noPositiveSignals: 'No positive signals detected', unknown: 'Unknown',
-			sourceReputation: 'Source not identified', corroborationOf: 'of 5 sources'
+			sourceReputation: 'Source not identified', corroborationOf: 'of 5 sources',
+			analyzedWith: 'Analyzed with',
+			modelDisagreement: 'Models did not fully agree — result less certain'
 		},
 		apiDrawer: {
 			title: 'Your API Key',
