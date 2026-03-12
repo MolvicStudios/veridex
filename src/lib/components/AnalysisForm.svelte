@@ -21,6 +21,21 @@
 	let error = $state('');
 	let phase = $state<'idle' | 'fetching' | 'analyzing'>('idle');
 	let mode = $state<'fast' | 'precise'>('fast');
+	let retryCountdown = $state(0);
+	let retryTimer: ReturnType<typeof setInterval> | null = null;
+
+	function clearRetry() {
+		if (retryTimer) { clearInterval(retryTimer); retryTimer = null; }
+		retryCountdown = 0;
+	}
+
+	function scheduleRetry() {
+		retryCountdown = 4;
+		retryTimer = setInterval(() => {
+			retryCountdown--;
+			if (retryCountdown <= 0) { clearRetry(); analyze(true); }
+		}, 1000);
+	}
 
 	// Pre-fill from news item
 	export function prefillUrl(u: string) {
@@ -42,7 +57,8 @@
 	);
 	const canPrecise = $derived(hasOwnKey && configuredProviders.length >= 2);
 
-	async function analyze() {
+	async function analyze(isRetry = false) {
+		clearRetry();
 		error = '';
 		const content = tab === 'url' ? url.trim() : text.trim();
 
@@ -64,10 +80,13 @@
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({ url: content })
 				});
-				if (!fetchRes.ok) { error = t.errors.fetchError; loading = false; phase = 'idle'; return; }
-				const { text: fetched } = await fetchRes.json();
-				if (!fetched || fetched.length < 100) { error = t.errors.fetchError; loading = false; phase = 'idle'; return; }
-				articleContent = fetched;
+				const fetchOk = fetchRes.ok ? await fetchRes.json().catch(() => null) : null;
+				if (!fetchOk || fetchOk.text?.length < 100) {
+					loading = false; phase = 'idle';
+					if (!isRetry) { scheduleRetry(); return; }
+					error = t.errors.fetchError; return;
+				}
+				articleContent = fetchOk.text;
 			}
 
 			phase = 'analyzing';
@@ -183,8 +202,13 @@
 		></textarea>
 	{/if}
 
-	<!-- Error -->
-	{#if error}
+	<!-- Error / retry -->
+	{#if retryCountdown > 0}
+		<div class="flex items-center justify-between text-sm">
+			<p class="text-amber-500 flex items-center gap-1.5">⏳ {t.errors.fetchRetrying(retryCountdown)}</p>
+			<button onclick={() => { clearRetry(); analyze(true); }} class="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 underline">{t.errors.retryNow}</button>
+		</div>
+	{:else if error}
 		<p class="text-sm text-red-500 flex items-center gap-1.5">⚠️ {error}</p>
 	{/if}
 

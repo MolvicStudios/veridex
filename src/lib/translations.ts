@@ -32,6 +32,8 @@ export const translations = {
 		},
 		errors: {
 			fetchError: 'No se pudo obtener el contenido de la URL. Prueba pegando el texto directamente.',
+			fetchRetrying: (n: number) => `No se pudo leer la URL, reintentando en ${n}s...`,
+			retryNow: 'Reintentar ahora',
 			analyzeError: 'Error al analizar. Por favor, inténtalo de nuevo.',
 			emptyContent: 'Introduce una URL o pega el texto de la noticia.',
 			invalidUrl: 'La URL no es válida.',
@@ -249,6 +251,8 @@ export const translations = {
 		},
 		errors: {
 			fetchError: "Couldn't fetch the URL content. Try pasting the text directly.",
+			fetchRetrying: (n: number) => `Couldn't read the URL, retrying in ${n}s...`,
+			retryNow: 'Retry now',
 			analyzeError: 'Analysis failed. Please try again.',
 			emptyContent: 'Enter a URL or paste the article text.',
 			invalidUrl: 'The URL is not valid.',
