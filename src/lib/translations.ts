@@ -117,21 +117,32 @@ export const translations = {
 			},
 			models: {
 				groq: [
-					{ id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Recomendado)' },
-					{ id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B (Rápido)' },
-					{ id: 'mixtral-8x7b-32768', name: 'Mixtral 8x7B' },
-					{ id: 'gemma2-9b-it', name: 'Gemma 2 9B' }
+					{ id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B — Recomendado', free: true },
+					{ id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B — Rápido', free: true },
+					{ id: 'mixtral-8x7b-32768', name: 'Mixtral 8x7B', free: true },
+					{ id: 'gemma2-9b-it', name: 'Gemma 2 9B', free: true },
+					{ id: 'llama-3.3-70b-specdec', name: 'Llama 3.3 70B SpecDec', free: true },
+					{ id: 'qwen-qwq-32b', name: 'Qwen QwQ 32B', free: true }
 				],
 				mistral: [
-					{ id: 'mistral-small-latest', name: 'Mistral Small (Recomendado)' },
-					{ id: 'mistral-large-latest', name: 'Mistral Large' },
-					{ id: 'open-mistral-7b', name: 'Mistral 7B (Gratuito)' }
+					{ id: 'mistral-small-latest', name: 'Mistral Small — Recomendado', free: true },
+					{ id: 'open-mistral-7b', name: 'Mistral 7B', free: true },
+					{ id: 'open-mixtral-8x7b', name: 'Mixtral 8x7B', free: true },
+					{ id: 'mistral-large-latest', name: 'Mistral Large 💳', free: false },
+					{ id: 'mistral-medium-latest', name: 'Mistral Medium 💳', free: false },
+					{ id: 'codestral-latest', name: 'Codestral 💳', free: false }
 				],
 				openrouter: [
-					{ id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B (Gratuito)' },
-					{ id: 'google/gemini-2.0-flash-lite:free', name: 'Gemini 2.0 Flash Lite (Gratuito)' },
-					{ id: 'mistralai/mistral-7b-instruct:free', name: 'Mistral 7B (Gratuito)' },
-					{ id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 (Gratuito)' }
+					{ id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B — Gratuito', free: true },
+					{ id: 'google/gemini-2.0-flash-lite:free', name: 'Gemini 2.0 Flash Lite — Gratuito', free: true },
+					{ id: 'mistralai/mistral-7b-instruct:free', name: 'Mistral 7B — Gratuito', free: true },
+					{ id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 — Gratuito', free: true },
+					{ id: 'qwen/qwen-2.5-72b-instruct:free', name: 'Qwen 2.5 72B — Gratuito', free: true },
+					{ id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet 💳', free: false },
+					{ id: 'openai/gpt-4o', name: 'GPT-4o 💳', free: false },
+					{ id: 'google/gemini-2.0-flash-001', name: 'Gemini 2.0 Flash 💳', free: false },
+					{ id: 'anthropic/claude-3.7-sonnet', name: 'Claude 3.7 Sonnet 💳', free: false },
+					{ id: 'x-ai/grok-2-1212', name: 'Grok 2 💳', free: false }
 				]
 			}
 		},
@@ -316,21 +327,32 @@ export const translations = {
 			},
 			models: {
 				groq: [
-					{ id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B (Recommended)' },
-					{ id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B (Fast)' },
-					{ id: 'mixtral-8x7b-32768', name: 'Mixtral 8x7B' },
-					{ id: 'gemma2-9b-it', name: 'Gemma 2 9B' }
+					{ id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B — Recommended', free: true },
+					{ id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B — Fast', free: true },
+					{ id: 'mixtral-8x7b-32768', name: 'Mixtral 8x7B', free: true },
+					{ id: 'gemma2-9b-it', name: 'Gemma 2 9B', free: true },
+					{ id: 'llama-3.3-70b-specdec', name: 'Llama 3.3 70B SpecDec', free: true },
+					{ id: 'qwen-qwq-32b', name: 'Qwen QwQ 32B', free: true }
 				],
 				mistral: [
-					{ id: 'mistral-small-latest', name: 'Mistral Small (Recommended)' },
-					{ id: 'mistral-large-latest', name: 'Mistral Large' },
-					{ id: 'open-mistral-7b', name: 'Mistral 7B (Free)' }
+					{ id: 'mistral-small-latest', name: 'Mistral Small — Recommended', free: true },
+					{ id: 'open-mistral-7b', name: 'Mistral 7B', free: true },
+					{ id: 'open-mixtral-8x7b', name: 'Mixtral 8x7B', free: true },
+					{ id: 'mistral-large-latest', name: 'Mistral Large 💳', free: false },
+					{ id: 'mistral-medium-latest', name: 'Mistral Medium 💳', free: false },
+					{ id: 'codestral-latest', name: 'Codestral 💳', free: false }
 				],
 				openrouter: [
-					{ id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B (Free)' },
-					{ id: 'google/gemini-2.0-flash-lite:free', name: 'Gemini 2.0 Flash Lite (Free)' },
-					{ id: 'mistralai/mistral-7b-instruct:free', name: 'Mistral 7B (Free)' },
-					{ id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 (Free)' }
+					{ id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B — Free', free: true },
+					{ id: 'google/gemini-2.0-flash-lite:free', name: 'Gemini 2.0 Flash Lite — Free', free: true },
+					{ id: 'mistralai/mistral-7b-instruct:free', name: 'Mistral 7B — Free', free: true },
+					{ id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 — Free', free: true },
+					{ id: 'qwen/qwen-2.5-72b-instruct:free', name: 'Qwen 2.5 72B — Free', free: true },
+					{ id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet 💳', free: false },
+					{ id: 'openai/gpt-4o', name: 'GPT-4o 💳', free: false },
+					{ id: 'google/gemini-2.0-flash-001', name: 'Gemini 2.0 Flash 💳', free: false },
+					{ id: 'anthropic/claude-3.7-sonnet', name: 'Claude 3.7 Sonnet 💳', free: false },
+					{ id: 'x-ai/grok-2-1212', name: 'Grok 2 💳', free: false }
 				]
 			}
 		},

@@ -61,38 +61,81 @@ function createCounterStore() {
 export const dailyCount = createCounterStore();
 
 // ── API key settings ───────────────────────────────────────────────────────
-export interface ApiKeySettings {
-	provider: 'groq' | 'mistral' | 'openrouter';
+export type ProviderId = 'groq' | 'mistral' | 'openrouter';
+
+export interface ProviderConfig {
 	key: string;
 	model: string;
 }
 
+export interface ApiKeySettings {
+	activeProvider: ProviderId;
+	groq: ProviderConfig;
+	mistral: ProviderConfig;
+	openrouter: ProviderConfig;
+}
+
 const API_KEY_DEFAULTS: ApiKeySettings = {
-	provider: 'groq',
-	key: '',
-	model: 'llama-3.3-70b-versatile'
+	activeProvider: 'groq',
+	groq: { key: '', model: 'llama-3.3-70b-versatile' },
+	mistral: { key: '', model: 'mistral-small-latest' },
+	openrouter: { key: '', model: 'meta-llama/llama-3.3-70b-instruct:free' }
 };
 
 function createApiKeyStore() {
-	const { subscribe, set } = writable<ApiKeySettings>(API_KEY_DEFAULTS);
+	const { subscribe, set, update } = writable<ApiKeySettings>(API_KEY_DEFAULTS);
 
 	function load() {
 		if (!browser) return;
 		const raw = localStorage.getItem('veridex_api');
-		if (raw) { try { set(JSON.parse(raw)); } catch { /* ignore */ } }
+		if (raw) {
+			try {
+				const parsed = JSON.parse(raw);
+				// Migrate old format (single key/provider/model)
+				if ('key' in parsed && !('groq' in parsed)) {
+					const migrated: ApiKeySettings = { ...API_KEY_DEFAULTS };
+					if (parsed.provider && parsed.key) {
+						migrated[parsed.provider as ProviderId] = { key: parsed.key, model: parsed.model || '' };
+						migrated.activeProvider = parsed.provider;
+					}
+					set(migrated);
+				} else {
+					set({ ...API_KEY_DEFAULTS, ...parsed });
+				}
+			} catch { /* ignore */ }
+		}
 	}
 
-	function save(s: ApiKeySettings) {
-		set(s);
-		if (browser) localStorage.setItem('veridex_api', JSON.stringify(s));
+	function saveProvider(provider: ProviderId, config: ProviderConfig) {
+		update(s => {
+			const next = { ...s, [provider]: config };
+			if (browser) localStorage.setItem('veridex_api', JSON.stringify(next));
+			return next;
+		});
 	}
 
-	function clear() {
+	function setActive(provider: ProviderId) {
+		update(s => {
+			const next = { ...s, activeProvider: provider };
+			if (browser) localStorage.setItem('veridex_api', JSON.stringify(next));
+			return next;
+		});
+	}
+
+	function clearProvider(provider: ProviderId) {
+		update(s => {
+			const next = { ...s, [provider]: { ...API_KEY_DEFAULTS[provider] } };
+			if (browser) localStorage.setItem('veridex_api', JSON.stringify(next));
+			return next;
+		});
+	}
+
+	function clearAll() {
 		set(API_KEY_DEFAULTS);
 		if (browser) localStorage.removeItem('veridex_api');
 	}
 
-	return { subscribe, load, save, clear };
+	return { subscribe, load, saveProvider, setActive, clearProvider, clearAll };
 }
 export const apiKeyStore = createApiKeyStore();
 

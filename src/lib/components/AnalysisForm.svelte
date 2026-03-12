@@ -31,7 +31,7 @@
 		text = txt;
 	}
 
-	const hasOwnKey = $derived($apiKeyStore.key.trim().length > 0);
+	const hasOwnKey = $derived($apiKeyStore[$apiKeyStore.activeProvider].key.trim().length > 0);
 	const remaining = $derived(FREE_LIMIT - $dailyCount);
 	const limitReached = $derived(!hasOwnKey && $dailyCount >= FREE_LIMIT);
 
@@ -70,9 +70,9 @@
 			};
 
 			if (hasOwnKey) {
-				body.userKey = $apiKeyStore.key;
-				body.provider = $apiKeyStore.provider;
-				body.model = $apiKeyStore.model;
+				body.userKey = $apiKeyStore[$apiKeyStore.activeProvider].key;
+				body.provider = $apiKeyStore.activeProvider;
+				body.model = $apiKeyStore[$apiKeyStore.activeProvider].model;
 			}
 
 			const res = await fetch('/api/analyze', {
