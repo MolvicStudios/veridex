@@ -78,18 +78,18 @@ function createApiKeyStore() {
 
 	function load() {
 		if (!browser) return;
-		const raw = localStorage.getItem('prospectly_api');
+		const raw = localStorage.getItem('veridex_api');
 		if (raw) { try { set(JSON.parse(raw)); } catch { /* ignore */ } }
 	}
 
 	function save(s: ApiKeySettings) {
 		set(s);
-		if (browser) localStorage.setItem('prospectly_api', JSON.stringify(s));
+		if (browser) localStorage.setItem('veridex_api', JSON.stringify(s));
 	}
 
 	function clear() {
 		set(API_KEY_DEFAULTS);
-		if (browser) localStorage.removeItem('prospectly_api');
+		if (browser) localStorage.removeItem('veridex_api');
 	}
 
 	return { subscribe, load, save, clear };

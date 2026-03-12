@@ -14,7 +14,7 @@
 			<div>
 				<div class="flex items-center gap-2 font-bold text-base mb-2">
 					<span class="w-6 h-6 rounded-md bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-black">P</span>
-					Prospectly.shop
+					Veridex.quest
 				</div>
 				<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{t.footer.tagline}</p>
 				<p class="text-xs text-slate-400 dark:text-slate-500 mt-1">{t.nav.by} <a href="https://molvicstudios.pro" class="hover:text-blue-500 transition" target="_blank" rel="noopener noreferrer">MolvicStudios.pro</a></p>

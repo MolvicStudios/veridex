@@ -13,7 +13,7 @@
 		<!-- Logo -->
 		<a href="/{lang}" class="flex items-center gap-2 font-bold text-lg tracking-tight">
 			<span class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white text-xs font-black">P</span>
-			<span class="hidden sm:block">Prospectly<span class="text-slate-400 font-normal text-sm">.shop</span></span>
+			<span class="hidden sm:block">Veridex<span class="text-slate-400 font-normal text-sm">.quest</span></span>
 		</a>
 
 		<!-- Nav -->

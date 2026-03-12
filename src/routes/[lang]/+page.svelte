@@ -75,10 +75,10 @@
 	<meta name="description" content={t.meta.description} />
 	<meta property="og:title" content={t.meta.title} />
 	<meta property="og:description" content={t.meta.description} />
-	<meta property="og:url" content="https://prospectly.shop/{lang}" />
-	<link rel="canonical" href="https://prospectly.shop/{lang}" />
-	<link rel="alternate" hreflang="es" href="https://prospectly.shop/es" />
-	<link rel="alternate" hreflang="en" href="https://prospectly.shop/en" />
+	<meta property="og:url" content="https://veridex.quest/{lang}" />
+	<link rel="canonical" href="https://veridex.quest/{lang}" />
+	<link rel="alternate" hreflang="es" href="https://veridex.quest/es" />
+	<link rel="alternate" hreflang="en" href="https://veridex.quest/en" />
 </svelte:head>
 
 <!-- Hero section -->

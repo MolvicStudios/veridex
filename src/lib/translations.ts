@@ -3,7 +3,7 @@ export type Lang = 'es' | 'en';
 export const translations = {
 	es: {
 		meta: {
-			title: 'Prospectly — Verifica cualquier noticia con IA',
+			title: 'Veridex — Verifica cualquier noticia con IA',
 			description: 'Analiza la fiabilidad de noticias con inteligencia artificial. Detecta fake news, contenido generado por IA y sesgos editoriales.'
 		},
 		nav: { home: 'Inicio', privacy: 'Privacidad', cookies: 'Cookies', terms: 'Términos', by: 'por' },
@@ -154,7 +154,7 @@ export const translations = {
 				{ title: 'Obtén el resultado', description: 'Recibe un informe detallado con puntuaciones y una recomendación clara.' }
 			]
 		},
-		disclaimer: 'Prospectly es una herramienta de orientación. Los resultados son estimaciones basadas en IA y no constituyen una verificación periodística definitiva. Utiliza siempre el pensamiento crítico.',
+		disclaimer: 'Veridex es una herramienta de orientación. Los resultados son estimaciones basadas en IA y no constituyen una verificación periodística definitiva. Utiliza siempre el pensamiento crítico.',
 		cookie: {
 			message: 'Usamos cookies propias y de terceros (Google AdSense) para mejorar tu experiencia y mostrarte publicidad relevante.',
 			accept: 'Aceptar todas', reject: 'Solo esenciales', learnMore: 'Más info'
@@ -168,7 +168,7 @@ export const translations = {
 			lastUpdated: 'Última actualización: 12 de marzo de 2026',
 			sections: [
 				{ title: '1. Responsable del tratamiento', content: 'MolvicStudios.pro es el responsable del tratamiento de los datos. Contacto: molvicstudios@outlook.com' },
-				{ title: '2. Datos que recopilamos', content: 'Prospectly no requiere registro ni recoge datos personales identificables. Los únicos datos procesados son el texto o URL que el usuario introduce voluntariamente para su análisis, los cuales son enviados a modelos de IA de terceros para generar el informe y no son almacenados en nuestros servidores.' },
+				{ title: '2. Datos que recopilamos', content: 'Veridex no requiere registro ni recoge datos personales identificables. Los únicos datos procesados son el texto o URL que el usuario introduce voluntariamente para su análisis, los cuales son enviados a modelos de IA de terceros para generar el informe y no son almacenados en nuestros servidores.' },
 				{ title: '3. Uso de cookies', content: 'Usamos cookies técnicas esenciales para el funcionamiento del sitio (preferencias de tema e idioma, contador de análisis diarios). Con tu consentimiento, también usamos cookies de terceros de Google AdSense para mostrar publicidad relevante. Consulta nuestra Política de Cookies para más detalle.' },
 				{ title: '4. Servicios de terceros', content: 'Para el análisis de contenido usamos las APIs de Groq Inc., Mistral AI y OpenRouter. Para la publicidad usamos Google AdSense. Para la extracción de URLs usamos el servicio público Jina Reader. Cada uno tiene su propia política de privacidad.' },
 				{ title: '5. Base legal del tratamiento', content: 'El tratamiento se basa en el interés legítimo del servicio (análisis solicitado por el usuario) y en el consentimiento explícito para las cookies no esenciales.' },
@@ -192,18 +192,18 @@ export const translations = {
 			title: 'Términos de Uso',
 			lastUpdated: 'Última actualización: 12 de marzo de 2026',
 			sections: [
-				{ title: '1. Aceptación de los términos', content: 'Al usar Prospectly aceptas estos términos de uso. Si no los aceptas, por favor no uses el servicio.' },
-				{ title: '2. Descripción del servicio', content: 'Prospectly es una herramienta de análisis de noticias basada en inteligencia artificial. Los resultados son estimaciones y no garantías de veracidad o falsedad de ninguna noticia.' },
-				{ title: '3. Limitación de responsabilidad', content: 'Prospectly y MolvicStudios.pro no son responsables de las decisiones tomadas basándose en los resultados del análisis. La herramienta es orientativa y complementaria al pensamiento crítico del usuario.' },
-				{ title: '4. Uso aceptable', content: 'No está permitido usar Prospectly para: (a) automatizar solicitudes masivas, (b) intentar extraer datos del sistema, (c) usar el servicio con fines ilegales o para difundir desinformación.' },
-				{ title: '5. Propiedad intelectual', content: 'El nombre Prospectly, el diseño y el código son propiedad de MolvicStudios.pro. Queda prohibida su reproducción sin autorización expresa.' },
+				{ title: '1. Aceptación de los términos', content: 'Al usar Veridex aceptas estos términos de uso. Si no los aceptas, por favor no uses el servicio.' },
+				{ title: '2. Descripción del servicio', content: 'Veridex es una herramienta de análisis de noticias basada en inteligencia artificial. Los resultados son estimaciones y no garantías de veracidad o falsedad de ninguna noticia.' },
+				{ title: '3. Limitación de responsabilidad', content: 'Veridex y MolvicStudios.pro no son responsables de las decisiones tomadas basándose en los resultados del análisis. La herramienta es orientativa y complementaria al pensamiento crítico del usuario.' },
+				{ title: '4. Uso aceptable', content: 'No está permitido usar Veridex para: (a) automatizar solicitudes masivas, (b) intentar extraer datos del sistema, (c) usar el servicio con fines ilegales o para difundir desinformación.' },
+				{ title: '5. Propiedad intelectual', content: 'El nombre Veridex, el diseño y el código son propiedad de MolvicStudios.pro. Queda prohibida su reproducción sin autorización expresa.' },
 				{ title: '6. Modificaciones', content: 'Nos reservamos el derecho de modificar el servicio o estos términos en cualquier momento. Los cambios serán comunicados en esta página.' }
 			]
 		}
 	},
 	en: {
 		meta: {
-			title: 'Prospectly — Verify any news with AI',
+			title: 'Veridex — Verify any news with AI',
 			description: 'Analyze news reliability with artificial intelligence. Detect fake news, AI-generated content and editorial bias.'
 		},
 		nav: { home: 'Home', privacy: 'Privacy', cookies: 'Cookies', terms: 'Terms', by: 'by' },
@@ -354,7 +354,7 @@ export const translations = {
 				{ title: 'Get the result', description: 'Receive a detailed report with scores and a clear recommendation.' }
 			]
 		},
-		disclaimer: 'Prospectly is a guidance tool. Results are AI-based estimates and do not constitute a definitive journalistic verification. Always use critical thinking.',
+		disclaimer: 'Veridex is a guidance tool. Results are AI-based estimates and do not constitute a definitive journalistic verification. Always use critical thinking.',
 		cookie: {
 			message: 'We use first- and third-party cookies (Google AdSense) to improve your experience and show relevant ads.',
 			accept: 'Accept all', reject: 'Essential only', learnMore: 'Learn more'
@@ -368,7 +368,7 @@ export const translations = {
 			lastUpdated: 'Last updated: March 12, 2026',
 			sections: [
 				{ title: '1. Data controller', content: 'MolvicStudios.pro is the data controller. Contact: molvicstudios@outlook.com' },
-				{ title: '2. Data we collect', content: 'Prospectly does not require registration or collect personally identifiable data. The only data processed is the text or URL voluntarily submitted by the user for analysis, which is sent to third-party AI models to generate the report and is not stored on our servers.' },
+				{ title: '2. Data we collect', content: 'Veridex does not require registration or collect personally identifiable data. The only data processed is the text or URL voluntarily submitted by the user for analysis, which is sent to third-party AI models to generate the report and is not stored on our servers.' },
 				{ title: '3. Use of cookies', content: 'We use essential technical cookies for site functionality (theme preferences, language, daily analysis counter). With your consent, we also use third-party Google AdSense cookies to display relevant advertising. See our Cookie Policy for details.' },
 				{ title: '4. Third-party services', content: 'For content analysis we use the APIs of Groq Inc., Mistral AI and OpenRouter. For advertising we use Google AdSense. For URL extraction we use the public Jina Reader service. Each has its own privacy policy.' },
 				{ title: '5. Legal basis', content: 'Processing is based on the legitimate interest of the service (analysis requested by the user) and explicit consent for non-essential cookies.' },
@@ -392,11 +392,11 @@ export const translations = {
 			title: 'Terms of Use',
 			lastUpdated: 'Last updated: March 12, 2026',
 			sections: [
-				{ title: '1. Acceptance of terms', content: 'By using Prospectly you accept these terms. If you do not agree, please do not use the service.' },
-				{ title: '2. Service description', content: 'Prospectly is an AI-powered news analysis tool. Results are estimates and do not constitute guarantees of the veracity or falsity of any news article.' },
-				{ title: '3. Limitation of liability', content: 'Prospectly and MolvicStudios.pro are not responsible for decisions made based on analysis results. The tool is advisory and complementary to the user\'s own critical thinking.' },
-				{ title: '4. Acceptable use', content: 'It is not permitted to use Prospectly to: (a) automate bulk requests, (b) attempt to extract system data, (c) use the service for illegal purposes or to spread disinformation.' },
-				{ title: '5. Intellectual property', content: 'The Prospectly name, design and code are the property of MolvicStudios.pro. Reproduction without express authorization is prohibited.' },
+				{ title: '1. Acceptance of terms', content: 'By using Veridex you accept these terms. If you do not agree, please do not use the service.' },
+				{ title: '2. Service description', content: 'Veridex is an AI-powered news analysis tool. Results are estimates and do not constitute guarantees of the veracity or falsity of any news article.' },
+				{ title: '3. Limitation of liability', content: 'Veridex and MolvicStudios.pro are not responsible for decisions made based on analysis results. The tool is advisory and complementary to the user\'s own critical thinking.' },
+				{ title: '4. Acceptable use', content: 'It is not permitted to use Veridex to: (a) automate bulk requests, (b) attempt to extract system data, (c) use the service for illegal purposes or to spread disinformation.' },
+				{ title: '5. Intellectual property', content: 'The Veridex name, design and code are the property of MolvicStudios.pro. Reproduction without express authorization is prohibited.' },
 				{ title: '6. Modifications', content: 'We reserve the right to modify the service or these terms at any time. Changes will be communicated on this page.' }
 			]
 		}

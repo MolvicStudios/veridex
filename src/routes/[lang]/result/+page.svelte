@@ -36,7 +36,7 @@
 </script>
 
 <svelte:head>
-	<title>Resultado del análisis — Prospectly.shop</title>
+	<title>Resultado del análisis — Veridex.quest</title>
 </svelte:head>
 
 <div class="container-app py-10">

@@ -70,7 +70,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	// Try primary
 	try {
 		const res = await fetch(primaryUrl, {
-			headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Prospectly/1.0)' },
+			headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Veridex/1.0)' },
 			signal: AbortSignal.timeout(8000)
 		});
 		if (res.ok) {
@@ -82,7 +82,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	if (items.length === 0 && fallback !== primaryUrl) {
 		try {
 			const res = await fetch(fallback, {
-				headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Prospectly/1.0)' },
+				headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Veridex/1.0)' },
 				signal: AbortSignal.timeout(8000)
 			});
 			if (res.ok) {

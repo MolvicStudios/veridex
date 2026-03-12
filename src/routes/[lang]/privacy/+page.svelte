@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>{p.title} — Prospectly.shop</title>
+	<title>{p.title} — Veridex.quest</title>
 </svelte:head>
 
 <div class="container-app py-12">

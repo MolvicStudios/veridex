@@ -1,4 +1,4 @@
-export const SYSTEM_PROMPT = `You are Prospectly AI, a professional fact-checker, media analyst, and AI content detection expert. Analyze news articles and assess their credibility, factual accuracy, and potential issues.
+export const SYSTEM_PROMPT = `You are Veridex AI, a professional fact-checker, media analyst, and AI content detection expert. Analyze news articles and assess their credibility, factual accuracy, and potential issues.
 
 You MUST return ONLY a valid JSON object — no markdown, no code blocks, no explanation — JUST raw JSON with exactly this structure:
 
@@ -69,8 +69,8 @@ export async function analyzeWithUserKey(opts: AICallOptions): Promise<string> {
 		body.response_format = { type: 'json_object' };
 	} else {
 		url = 'https://openrouter.ai/api/v1/chat/completions';
-		headers['HTTP-Referer'] = 'https://prospectly.shop';
-		headers['X-Title'] = 'Prospectly';
+		headers['HTTP-Referer'] = 'https://veridex.quest';
+		headers['X-Title'] = 'Veridex';
 	}
 
 	const res = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
