@@ -11,14 +11,16 @@ const d = $derived(t.apiDrawer);
 let keys = $state({
 groq: $apiKeyStore.groq.key,
 mistral: $apiKeyStore.mistral.key,
-openrouter: $apiKeyStore.openrouter.key
+openai: $apiKeyStore.openai.key,
+google: $apiKeyStore.google.key
 });
 let models = $state({
 groq: $apiKeyStore.groq.model,
 mistral: $apiKeyStore.mistral.model,
-openrouter: $apiKeyStore.openrouter.model
+openai: $apiKeyStore.openai.model,
+google: $apiKeyStore.google.model
 });
-let showKeys = $state({ groq: false, mistral: false, openrouter: false });
+let showKeys = $state({ groq: false, mistral: false, openai: false, google: false });
 let activeProvider = $state<ProviderId>($apiKeyStore.activeProvider);
 let toast = $state('');
 
@@ -27,12 +29,14 @@ if ($apiDrawerOpen) {
 keys = {
 groq: $apiKeyStore.groq.key,
 mistral: $apiKeyStore.mistral.key,
-openrouter: $apiKeyStore.openrouter.key
+openai: $apiKeyStore.openai.key,
+google: $apiKeyStore.google.key
 };
 models = {
 groq: $apiKeyStore.groq.model,
 mistral: $apiKeyStore.mistral.model,
-openrouter: $apiKeyStore.openrouter.model
+openai: $apiKeyStore.openai.model,
+google: $apiKeyStore.google.model
 };
 activeProvider = $apiKeyStore.activeProvider;
 }
@@ -65,7 +69,7 @@ setTimeout(() => (toast = ''), 3000);
 
 function close() { apiDrawerOpen.set(false); }
 
-const providers: ProviderId[] = ['groq', 'mistral', 'openrouter'];
+const providers: ProviderId[] = ['groq', 'mistral', 'openai', 'google'];
 const savedCount = $derived(providers.filter(p => $apiKeyStore[p].key.trim()).length);
 </script>
 

@@ -39,7 +39,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 			// Primary provider
 			calls.push({
-				provider: (provider as 'groq' | 'mistral' | 'openrouter') ?? 'groq',
+				provider: (provider as 'groq' | 'mistral' | 'openai' | 'google') ?? 'groq',
 				apiKey: userKey!.trim(),
 				model: model ?? 'llama-3.3-70b-versatile',
 				content: content.trim()
@@ -49,7 +49,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			for (const [p, cfg] of Object.entries(extraKeys)) {
 				if (cfg.key?.trim() && p !== provider) {
 					calls.push({
-						provider: p as 'groq' | 'mistral' | 'openrouter',
+						provider: p as 'groq' | 'mistral' | 'openai' | 'google',
 						apiKey: cfg.key.trim(),
 						model: cfg.model,
 						content: content.trim()
@@ -72,7 +72,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		if (hasOwnKey) {
 			// Single model with user key
 			rawJson = await analyzeWithUserKey({
-				provider: (provider as 'groq' | 'mistral' | 'openrouter') ?? 'groq',
+				provider: (provider as 'groq' | 'mistral' | 'openai' | 'google') ?? 'groq',
 				apiKey: userKey!.trim(),
 				model: model ?? 'llama-3.3-70b-versatile',
 				content: content.trim()
@@ -82,9 +82,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			// Server key (free tier) — always single, always Groq
 			rawJson = await analyzeWithEnvKey(
 				content.trim(),
-				env.GROQ_API_KEY ?? '',
-				env.OPENROUTER_API_KEY ?? '',
-				env.AI_PROVIDER ?? 'groq'
+				env.GROQ_API_KEY ?? ''
 			);
 			modelsUsed = [`groq/llama-3.3-70b-versatile`];
 		}

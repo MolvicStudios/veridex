@@ -106,7 +106,7 @@ export const translations = {
 			clearBtn: 'Borrar clave',
 			savedMsg: '¡Clave guardada! Análisis ilimitados activados.',
 			clearedMsg: 'Clave eliminada. De vuelta al plan gratuito.',
-			howToGet: 'Cómo conseguir una clave gratuita',
+			howToGet: 'Cómo conseguir una clave',
 			providers: {
 				groq: {
 					name: 'Groq', description: 'Muy rápido. Tier gratuito generoso.',
@@ -118,10 +118,15 @@ export const translations = {
 					url: 'https://console.mistral.ai', urlText: 'console.mistral.ai',
 					steps: ['Crea cuenta en console.mistral.ai', 'Ve a "API Keys" → "Create new key"', 'Copia y pega aquí']
 				},
-				openrouter: {
-					name: 'OpenRouter', description: 'Acceso a cientos de modelos, muchos gratuitos.',
-					url: 'https://openrouter.ai', urlText: 'openrouter.ai',
-					steps: ['Crea cuenta en openrouter.ai', 'Ve a "Keys" → "Create Key"', 'Selecciona un modelo con ":free" al final', 'Copia y pega aquí']
+				openai: {
+					name: 'OpenAI', description: 'GPT-4o, o3 y más. Requiere plan de pago.',
+					url: 'https://platform.openai.com/api-keys', urlText: 'platform.openai.com',
+					steps: ['Crea cuenta en platform.openai.com', 'Ve a "API Keys" → "Create new secret key"', 'Añade crédito en Billing', 'Copia y pega aquí']
+				},
+				google: {
+					name: 'Google AI', description: 'Gemini 2.0 Flash, Pro y más. Tier gratuito disponible.',
+					url: 'https://aistudio.google.com/apikey', urlText: 'aistudio.google.com',
+					steps: ['Entra en aistudio.google.com', 'Haz clic en "Create API Key"', 'Copia y pega aquí']
 				}
 			},
 			models: {
@@ -141,17 +146,29 @@ export const translations = {
 					{ id: 'mistral-medium-latest', name: 'Mistral Medium 💳', free: false },
 					{ id: 'codestral-latest', name: 'Codestral 💳', free: false }
 				],
-				openrouter: [
-					{ id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B — Gratuito', free: true },
-					{ id: 'google/gemini-2.0-flash-lite:free', name: 'Gemini 2.0 Flash Lite — Gratuito', free: true },
-					{ id: 'mistralai/mistral-7b-instruct:free', name: 'Mistral 7B — Gratuito', free: true },
-					{ id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 — Gratuito', free: true },
-					{ id: 'qwen/qwen-2.5-72b-instruct:free', name: 'Qwen 2.5 72B — Gratuito', free: true },
-					{ id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet 💳', free: false },
-					{ id: 'openai/gpt-4o', name: 'GPT-4o 💳', free: false },
-					{ id: 'google/gemini-2.0-flash-001', name: 'Gemini 2.0 Flash 💳', free: false },
-					{ id: 'anthropic/claude-3.7-sonnet', name: 'Claude 3.7 Sonnet 💳', free: false },
-					{ id: 'x-ai/grok-2-1212', name: 'Grok 2 💳', free: false }
+				openai: [
+					{ id: 'gpt-4o-mini', name: 'GPT-4o Mini — Recomendado 💳', free: false },
+					{ id: 'gpt-4o', name: 'GPT-4o 💳', free: false },
+					{ id: 'gpt-4-turbo', name: 'GPT-4 Turbo 💳', free: false },
+					{ id: 'gpt-4.1', name: 'GPT-4.1 💳', free: false },
+					{ id: 'gpt-4.1-mini', name: 'GPT-4.1 Mini 💳', free: false },
+					{ id: 'gpt-4.1-nano', name: 'GPT-4.1 Nano 💳', free: false },
+					{ id: 'o3-mini', name: 'o3 Mini 💳', free: false },
+					{ id: 'o4-mini', name: 'o4 Mini 💳', free: false },
+					{ id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo 💳', free: false },
+					{ id: 'chatgpt-4o-latest', name: 'ChatGPT-4o Latest 💳', free: false }
+				],
+				google: [
+					{ id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash — Recomendado', free: true },
+					{ id: 'gemini-2.0-flash-lite', name: 'Gemini 2.0 Flash Lite', free: true },
+					{ id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash', free: true },
+					{ id: 'gemini-1.5-flash-8b', name: 'Gemini 1.5 Flash 8B', free: true },
+					{ id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', free: true },
+					{ id: 'gemini-2.5-pro-preview-05-06', name: 'Gemini 2.5 Pro 💳', free: false },
+					{ id: 'gemini-2.5-flash-preview-04-17', name: 'Gemini 2.5 Flash 💳', free: false },
+					{ id: 'gemini-2.0-flash-thinking-exp', name: 'Gemini 2.0 Flash Thinking', free: true },
+					{ id: 'gemma-3-27b-it', name: 'Gemma 3 27B', free: true },
+					{ id: 'gemma-3-12b-it', name: 'Gemma 3 12B', free: true }
 				]
 			}
 		},
@@ -177,12 +194,12 @@ export const translations = {
 			title: 'Tecnología y transparencia',
 			subtitle: 'Qué hay detrás de cada análisis',
 			cards: [
-				{ icon: '🧠', title: 'Modelos de IA líderes', description: 'Usamos Llama 3.3 70B (Groq), Mistral Small y más de 100 modelos vía OpenRouter. En modo Preciso, varios modelos analizan en paralelo y sus resultados se promedian.' },
+				{ icon: '🧠', title: 'Modelos de IA líderes', description: 'Usamos Llama 3.3 70B (Groq), Mistral Small, GPT-4o (OpenAI) y Gemini 2.0 Flash (Google). En modo Preciso, varios modelos analizan en paralelo y sus resultados se promedian.' },
 				{ icon: '🔍', title: 'Metodología clara', description: 'Evaluamos consistencia factual, corroboración con fuentes conocidas, indicadores de sesgo editorial y patrones de escritura generada por IA. Ningún modelo decide solo.' },
 				{ icon: '🔒', title: 'Sin datos almacenados', description: 'Veridex no guarda artículos ni resultados. El contenido viaja directamente a la API de IA y el informe vuelve a tu navegador, sin pasar por nuestros servidores.' }
 			],
 			stats: [
-				{ value: '3', label: 'proveedores de IA' },
+				{ value: '4', label: 'proveedores de IA' },
 				{ value: '0', label: 'datos guardados' },
 				{ value: '∞', label: 'análisis con tu clave' },
 				{ value: '<10s', label: 'por análisis' }
@@ -204,7 +221,7 @@ export const translations = {
 				{ title: '1. Responsable del tratamiento', content: 'MolvicStudios.pro es el responsable del tratamiento de los datos. Contacto: molvicstudios@outlook.com' },
 				{ title: '2. Datos que recopilamos', content: 'Veridex no requiere registro ni recoge datos personales identificables. Los únicos datos procesados son el texto o URL que el usuario introduce voluntariamente para su análisis, los cuales son enviados a modelos de IA de terceros para generar el informe y no son almacenados en nuestros servidores.' },
 				{ title: '3. Uso de cookies', content: 'Usamos cookies técnicas esenciales para el funcionamiento del sitio (preferencias de tema e idioma, contador de análisis diarios). Con tu consentimiento, también usamos cookies de terceros de Google AdSense para mostrar publicidad relevante. Consulta nuestra Política de Cookies para más detalle.' },
-				{ title: '4. Servicios de terceros', content: 'Para el análisis de contenido usamos las APIs de Groq Inc., Mistral AI y OpenRouter. Para la publicidad usamos Google AdSense. Para la extracción de URLs usamos el servicio público Jina Reader. Cada uno tiene su propia política de privacidad.' },
+				{ title: '4. Servicios de terceros', content: 'Para el análisis de contenido usamos las APIs de Groq Inc., Mistral AI, OpenAI y Google. Para la publicidad usamos Google AdSense. Para la extracción de URLs usamos el servicio público Jina Reader. Cada uno tiene su propia política de privacidad.' },
 				{ title: '5. Base legal del tratamiento', content: 'El tratamiento se basa en el interés legítimo del servicio (análisis solicitado por el usuario) y en el consentimiento explícito para las cookies no esenciales.' },
 				{ title: '6. Transferencias internacionales', content: 'Los modelos de IA pueden procesar datos en servidores ubicados fuera del Espacio Económico Europeo. Estas transferencias están amparadas por cláusulas contractuales estándar.' },
 				{ title: '7. Derechos del usuario', content: 'Tienes derecho a acceder, rectificar, suprimir y portabilidad de tus datos, así como a oponerte o limitar su tratamiento. Para ejercerlos, contacta con nosotros en molvicstudios@outlook.com' },
@@ -334,13 +351,13 @@ export const translations = {
 			provider: 'Provider',
 			model: 'Model',
 			apiKeyLabel: 'API Key',
-			apiKeyPlaceholder: 'gsk_... / sk-... / sk-or-...',
+			apiKeyPlaceholder: 'gsk_... / sk-... / sk-ant-...',
 			showKey: 'Show', hideKey: 'Hide',
 			saveBtn: 'Save & activate',
 			clearBtn: 'Remove key',
 			savedMsg: 'Key saved! Unlimited analyses activated.',
 			clearedMsg: 'Key removed. Back to free plan.',
-			howToGet: 'How to get a free API key',
+			howToGet: 'How to get an API key',
 			providers: {
 				groq: {
 					name: 'Groq', description: 'Very fast. Generous free tier.',
@@ -352,10 +369,15 @@ export const translations = {
 					url: 'https://console.mistral.ai', urlText: 'console.mistral.ai',
 					steps: ['Create account at console.mistral.ai', 'Go to "API Keys" → "Create new key"', 'Copy and paste here']
 				},
-				openrouter: {
-					name: 'OpenRouter', description: 'Access to hundreds of models, many free.',
-					url: 'https://openrouter.ai', urlText: 'openrouter.ai',
-					steps: ['Create account at openrouter.ai', 'Go to "Keys" → "Create Key"', 'Select a model with ":free" suffix', 'Copy and paste here']
+				openai: {
+					name: 'OpenAI', description: 'GPT-4o, o3 and more. Requires paid plan.',
+					url: 'https://platform.openai.com/api-keys', urlText: 'platform.openai.com',
+					steps: ['Create account at platform.openai.com', 'Go to "API Keys" → "Create new secret key"', 'Add credit in Billing', 'Copy and paste here']
+				},
+				google: {
+					name: 'Google AI', description: 'Gemini 2.0 Flash, Pro and more. Free tier available.',
+					url: 'https://aistudio.google.com/apikey', urlText: 'aistudio.google.com',
+					steps: ['Go to aistudio.google.com', 'Click "Create API Key"', 'Copy and paste here']
 				}
 			},
 			models: {
@@ -375,17 +397,29 @@ export const translations = {
 					{ id: 'mistral-medium-latest', name: 'Mistral Medium 💳', free: false },
 					{ id: 'codestral-latest', name: 'Codestral 💳', free: false }
 				],
-				openrouter: [
-					{ id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B — Free', free: true },
-					{ id: 'google/gemini-2.0-flash-lite:free', name: 'Gemini 2.0 Flash Lite — Free', free: true },
-					{ id: 'mistralai/mistral-7b-instruct:free', name: 'Mistral 7B — Free', free: true },
-					{ id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 — Free', free: true },
-					{ id: 'qwen/qwen-2.5-72b-instruct:free', name: 'Qwen 2.5 72B — Free', free: true },
-					{ id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet 💳', free: false },
-					{ id: 'openai/gpt-4o', name: 'GPT-4o 💳', free: false },
-					{ id: 'google/gemini-2.0-flash-001', name: 'Gemini 2.0 Flash 💳', free: false },
-					{ id: 'anthropic/claude-3.7-sonnet', name: 'Claude 3.7 Sonnet 💳', free: false },
-					{ id: 'x-ai/grok-2-1212', name: 'Grok 2 💳', free: false }
+				openai: [
+					{ id: 'gpt-4o-mini', name: 'GPT-4o Mini — Recommended 💳', free: false },
+					{ id: 'gpt-4o', name: 'GPT-4o 💳', free: false },
+					{ id: 'gpt-4-turbo', name: 'GPT-4 Turbo 💳', free: false },
+					{ id: 'gpt-4.1', name: 'GPT-4.1 💳', free: false },
+					{ id: 'gpt-4.1-mini', name: 'GPT-4.1 Mini 💳', free: false },
+					{ id: 'gpt-4.1-nano', name: 'GPT-4.1 Nano 💳', free: false },
+					{ id: 'o3-mini', name: 'o3 Mini 💳', free: false },
+					{ id: 'o4-mini', name: 'o4 Mini 💳', free: false },
+					{ id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo 💳', free: false },
+					{ id: 'chatgpt-4o-latest', name: 'ChatGPT-4o Latest 💳', free: false }
+				],
+				google: [
+					{ id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash — Recommended', free: true },
+					{ id: 'gemini-2.0-flash-lite', name: 'Gemini 2.0 Flash Lite', free: true },
+					{ id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash', free: true },
+					{ id: 'gemini-1.5-flash-8b', name: 'Gemini 1.5 Flash 8B', free: true },
+					{ id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro', free: true },
+					{ id: 'gemini-2.5-pro-preview-05-06', name: 'Gemini 2.5 Pro 💳', free: false },
+					{ id: 'gemini-2.5-flash-preview-04-17', name: 'Gemini 2.5 Flash 💳', free: false },
+					{ id: 'gemini-2.0-flash-thinking-exp', name: 'Gemini 2.0 Flash Thinking', free: true },
+					{ id: 'gemma-3-27b-it', name: 'Gemma 3 27B', free: true },
+					{ id: 'gemma-3-12b-it', name: 'Gemma 3 12B', free: true }
 				]
 			}
 		},
@@ -411,12 +445,12 @@ export const translations = {
 			title: 'Technology & transparency',
 			subtitle: "What's behind every analysis",
 			cards: [
-				{ icon: '🧠', title: 'Leading AI models', description: 'We use Llama 3.3 70B (Groq), Mistral Small and 100+ models via OpenRouter. In Precise mode, multiple models run in parallel and results are averaged.' },
+				{ icon: '🧠', title: 'Leading AI models', description: 'We use Llama 3.3 70B (Groq), Mistral Small, GPT-4o (OpenAI) and Gemini 2.0 Flash (Google). In Precise mode, multiple models run in parallel and results are averaged.' },
 				{ icon: '🔍', title: 'Clear methodology', description: 'We evaluate factual consistency, corroboration with known sources, editorial bias markers and patterns typical of AI-generated writing. No single model decides alone.' },
 				{ icon: '🔒', title: 'No data stored', description: 'Veridex stores no article or result. Content goes directly to the AI API and the report comes back to your browser, without passing through our servers.' }
 			],
 			stats: [
-				{ value: '3', label: 'AI providers' },
+				{ value: '4', label: 'AI providers' },
 				{ value: '0', label: 'data saved' },
 				{ value: '∞', label: 'analyses with your key' },
 				{ value: '<10s', label: 'per analysis' }
@@ -438,7 +472,7 @@ export const translations = {
 				{ title: '1. Data controller', content: 'MolvicStudios.pro is the data controller. Contact: molvicstudios@outlook.com' },
 				{ title: '2. Data we collect', content: 'Veridex does not require registration or collect personally identifiable data. The only data processed is the text or URL voluntarily submitted by the user for analysis, which is sent to third-party AI models to generate the report and is not stored on our servers.' },
 				{ title: '3. Use of cookies', content: 'We use essential technical cookies for site functionality (theme preferences, language, daily analysis counter). With your consent, we also use third-party Google AdSense cookies to display relevant advertising. See our Cookie Policy for details.' },
-				{ title: '4. Third-party services', content: 'For content analysis we use the APIs of Groq Inc., Mistral AI and OpenRouter. For advertising we use Google AdSense. For URL extraction we use the public Jina Reader service. Each has its own privacy policy.' },
+				{ title: '4. Third-party services', content: 'For content analysis we use the APIs of Groq Inc., Mistral AI, OpenAI and Google. For advertising we use Google AdSense. For URL extraction we use the public Jina Reader service. Each has its own privacy policy.' },
 				{ title: '5. Legal basis', content: 'Processing is based on the legitimate interest of the service (analysis requested by the user) and explicit consent for non-essential cookies.' },
 				{ title: '6. International transfers', content: 'AI models may process data on servers located outside the European Economic Area. Such transfers are covered by standard contractual clauses.' },
 				{ title: '7. Your rights', content: 'You have the right to access, rectify, erase and obtain portability of your data, as well as to object or restrict its processing. To exercise these rights contact us at molvicstudios@outlook.com' },

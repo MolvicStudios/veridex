@@ -47,11 +47,12 @@ JSON structure:
 ${JSON_SCHEMA}
 
 ${VERDICT_RULES}`,
-	openrouter: `You are Veridex AI, a professional fact-checker and media analyst.
+	openai: SYSTEM_PROMPT,
+	google: `You are Veridex AI, a professional fact-checker and media analyst.
 
-CRITICAL: Your entire response must be a single valid JSON object. Do not write anything before or after the JSON. Do not use markdown code blocks. Start with { and end with }.
+Return ONLY a valid JSON object. No markdown, no explanation, no code fences. Start with { and end with }.
 
-Required JSON structure:
+JSON structure:
 ${JSON_SCHEMA}
 
 ${VERDICT_RULES}`
@@ -64,7 +65,7 @@ export function extractJSON(text: string): string {
 }
 
 export interface AICallOptions {
-	provider: 'groq' | 'mistral' | 'openrouter';
+	provider: 'groq' | 'mistral' | 'openai' | 'google';
 	apiKey: string;
 	model: string;
 	content: string;
@@ -93,10 +94,13 @@ export async function analyzeWithUserKey(opts: AICallOptions): Promise<string> {
 	} else if (provider === 'mistral') {
 		url = 'https://api.mistral.ai/v1/chat/completions';
 		body.response_format = { type: 'json_object' };
-	} else {
-		url = 'https://openrouter.ai/api/v1/chat/completions';
-		headers['HTTP-Referer'] = 'https://veridex.quest';
-		headers['X-Title'] = 'Veridex';
+	} else if (provider === 'openai') {
+		url = 'https://api.openai.com/v1/chat/completions';
+		body.response_format = { type: 'json_object' };
+	} else if (provider === 'google') {
+		// Gemini API via OpenAI-compatible endpoint
+		url = 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions';
+		body.response_format = { type: 'json_object' };
 	}
 
 	const res = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
@@ -207,18 +211,8 @@ export async function analyzeMultiModel(calls: AICallOptions[]): Promise<{
 // ── Server-side call with env key ──────────────────────────────────────────
 export async function analyzeWithEnvKey(
 	content: string,
-	envGroq: string,
-	envOpenRouter: string,
-	provider = 'groq'
+	envGroq: string
 ): Promise<string> {
-	if (provider === 'openrouter') {
-		return analyzeWithUserKey({
-			provider: 'openrouter',
-			apiKey: envOpenRouter,
-			model: 'meta-llama/llama-3.3-70b-instruct:free',
-			content
-		});
-	}
 	return analyzeWithUserKey({
 		provider: 'groq',
 		apiKey: envGroq,

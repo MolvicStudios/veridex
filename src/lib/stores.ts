@@ -61,7 +61,7 @@ function createCounterStore() {
 export const dailyCount = createCounterStore();
 
 // ── API key settings ───────────────────────────────────────────────────────
-export type ProviderId = 'groq' | 'mistral' | 'openrouter';
+export type ProviderId = 'groq' | 'mistral' | 'openai' | 'google';
 
 export interface ProviderConfig {
 	key: string;
@@ -72,14 +72,16 @@ export interface ApiKeySettings {
 	activeProvider: ProviderId;
 	groq: ProviderConfig;
 	mistral: ProviderConfig;
-	openrouter: ProviderConfig;
+	openai: ProviderConfig;
+	google: ProviderConfig;
 }
 
 const API_KEY_DEFAULTS: ApiKeySettings = {
 	activeProvider: 'groq',
 	groq: { key: '', model: 'llama-3.3-70b-versatile' },
 	mistral: { key: '', model: 'mistral-small-latest' },
-	openrouter: { key: '', model: 'meta-llama/llama-3.3-70b-instruct:free' }
+	openai: { key: '', model: 'gpt-4o-mini' },
+	google: { key: '', model: 'gemini-2.0-flash' }
 };
 
 function createApiKeyStore() {
