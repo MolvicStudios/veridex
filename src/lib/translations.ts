@@ -173,6 +173,21 @@ export const translations = {
 				{ title: 'Obtén el resultado', description: 'Recibe un informe detallado con puntuaciones y una recomendación clara.' }
 			]
 		},
+		about: {
+			title: 'Tecnología y transparencia',
+			subtitle: 'Qué hay detrás de cada análisis',
+			cards: [
+				{ icon: '🧠', title: 'Modelos de IA líderes', description: 'Usamos Llama 3.3 70B (Groq), Mistral Small y más de 100 modelos vía OpenRouter. En modo Preciso, varios modelos analizan en paralelo y sus resultados se promedian.' },
+				{ icon: '🔍', title: 'Metodología clara', description: 'Evaluamos consistencia factual, corroboración con fuentes conocidas, indicadores de sesgo editorial y patrones de escritura generada por IA. Ningún modelo decide solo.' },
+				{ icon: '🔒', title: 'Sin datos almacenados', description: 'Veridex no guarda artículos ni resultados. El contenido viaja directamente a la API de IA y el informe vuelve a tu navegador, sin pasar por nuestros servidores.' }
+			],
+			stats: [
+				{ value: '3', label: 'proveedores de IA' },
+				{ value: '0', label: 'datos guardados' },
+				{ value: '∞', label: 'análisis con tu clave' },
+				{ value: '<10s', label: 'por análisis' }
+			]
+		},
 		disclaimer: 'Veridex es una herramienta de orientación. Los resultados son estimaciones basadas en IA y no constituyen una verificación periodística definitiva. Utiliza siempre el pensamiento crítico.',
 		cookie: {
 			message: 'Usamos cookies propias y de terceros (Google AdSense) para mejorar tu experiencia y mostrarte publicidad relevante.',
@@ -390,6 +405,21 @@ export const translations = {
 				{ title: 'Enter the article', description: 'Paste the URL or text of any article you want to verify.' },
 				{ title: 'AI analyzes it', description: 'Our AI models examine the content, sources and writing style.' },
 				{ title: 'Get the result', description: 'Receive a detailed report with scores and a clear recommendation.' }
+			]
+		},
+		about: {
+			title: 'Technology & transparency',
+			subtitle: "What's behind every analysis",
+			cards: [
+				{ icon: '🧠', title: 'Leading AI models', description: 'We use Llama 3.3 70B (Groq), Mistral Small and 100+ models via OpenRouter. In Precise mode, multiple models run in parallel and results are averaged.' },
+				{ icon: '🔍', title: 'Clear methodology', description: 'We evaluate factual consistency, corroboration with known sources, editorial bias markers and patterns typical of AI-generated writing. No single model decides alone.' },
+				{ icon: '🔒', title: 'No data stored', description: 'Veridex stores no article or result. Content goes directly to the AI API and the report comes back to your browser, without passing through our servers.' }
+			],
+			stats: [
+				{ value: '3', label: 'AI providers' },
+				{ value: '0', label: 'data saved' },
+				{ value: '∞', label: 'analyses with your key' },
+				{ value: '<10s', label: 'per analysis' }
 			]
 		},
 		disclaimer: 'Veridex is a guidance tool. Results are AI-based estimates and do not constitute a definitive journalistic verification. Always use critical thinking.',

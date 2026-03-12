@@ -68,6 +68,19 @@
 			newsLoading = false;
 		}
 	});
+
+	const schema = $derived(JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'WebApplication',
+		name: 'Veridex',
+		url: `https://veridex.quest/${lang}`,
+		description: t.meta.description,
+		applicationCategory: 'NewsApplication',
+		operatingSystem: 'Web',
+		inLanguage: lang === 'es' ? 'es-ES' : 'en-US',
+		offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+		author: { '@type': 'Organization', name: 'MolvicStudios', url: 'https://molvicstudios.pro' }
+	}).replace(/</g, '\\u003c'));
 </script>
 
 <svelte:head>
@@ -79,6 +92,8 @@
 	<link rel="canonical" href="https://veridex.quest/{lang}" />
 	<link rel="alternate" hreflang="es" href="https://veridex.quest/es" />
 	<link rel="alternate" hreflang="en" href="https://veridex.quest/en" />
+	<!-- JSON-LD structured data -->
+	{@html '<script type="application/ld+json">' + schema + '<\/script>'}
 </svelte:head>
 
 <!-- Hero section -->
@@ -104,8 +119,23 @@
 		<div bind:this={formSection} id="analyze-section" class="card p-6 max-w-2xl mx-auto shadow-xl">
 			<AnalysisForm bind:this={formRef} {lang} {onResult} />
 		</div>
+		<p class="text-xs text-amber-600/70 dark:text-amber-400/60 text-center max-w-2xl mx-auto mt-3 leading-relaxed px-2">{t.disclaimer}</p>
 	</div>
 </section>
+
+<!-- Trust stats -->
+<div class="border-y border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/30">
+	<div class="container-app">
+		<div class="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-slate-100 dark:divide-slate-800">
+			{#each t.about.stats as stat}
+				<div class="flex flex-col items-center justify-center py-5 px-4 text-center">
+					<span class="text-2xl font-black text-blue-600 dark:text-blue-400 leading-none mb-1">{stat.value}</span>
+					<span class="text-xs text-slate-500 dark:text-slate-400">{stat.label}</span>
+				</div>
+			{/each}
+		</div>
+	</div>
+</div>
 
 <!-- Ad -->
 <div class="container-app"><AdBanner /></div>
@@ -118,7 +148,7 @@
 {/if}
 
 <!-- News Research section -->
-<section class="container-app pb-16">
+<section class="container-app pb-16" data-nosnippet>
 	<NewsSection
 		{lang}
 		items={newsItems}
@@ -143,5 +173,22 @@
 				</div>
 			{/each}
 		</div>
+	</div>
+</section>
+
+<!-- About / Technology -->
+<section class="container-app py-14">
+	<div class="text-center mb-10">
+		<h2 class="text-2xl font-bold mb-2">{t.about.title}</h2>
+		<p class="text-slate-500 dark:text-slate-400 text-sm max-w-lg mx-auto">{t.about.subtitle}</p>
+	</div>
+	<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+		{#each t.about.cards as card}
+			<div class="card p-6 space-y-3">
+				<p class="text-3xl leading-none">{card.icon}</p>
+				<h3 class="font-semibold">{card.title}</h3>
+				<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{card.description}</p>
+			</div>
+		{/each}
 	</div>
 </section>
