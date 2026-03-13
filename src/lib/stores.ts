@@ -147,20 +147,6 @@ function createApiKeyStore() {
 }
 export const apiKeyStore = createApiKeyStore();
 
-// ── Cookie consent ─────────────────────────────────────────────────────────
-function createCookieStore() {
-	const { subscribe, set } = writable<'accepted' | 'rejected' | null>(null);
-
-	function load() {
-		if (!browser) return;
-		set(localStorage.getItem('cookie_consent') as 'accepted' | 'rejected' | null);
-	}
-	function accept() { set('accepted'); if (browser) localStorage.setItem('cookie_consent', 'accepted'); }
-	function reject() { set('rejected'); if (browser) localStorage.setItem('cookie_consent', 'rejected'); }
-
-	return { subscribe, load, accept, reject };
-}
-export const cookieConsent = createCookieStore();
 
 // ── Shared analysis result (used between form and result page) ─────────────
 export const currentResult = writable<AnalysisResult | null>(null);
