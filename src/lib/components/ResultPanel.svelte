@@ -3,7 +3,6 @@
 	import ReliabilityGauge from './ReliabilityGauge.svelte';
 	import VerdictBadge from './VerdictBadge.svelte';
 	import ScoreBar from './ScoreBar.svelte';
-	import AdBanner from './AdBanner.svelte';
 	import type { AnalysisResult } from '../../types/analysis.js';
 	import type { Lang } from '$lib/translations.js';
 	import { getT } from '$lib/translations.js';
@@ -105,9 +104,6 @@
 			</button>
 		</div>
 	</div>
-
-	<!-- Ad -->
-	<AdBanner />
 
 	<!-- Summary -->
 	<div class="card p-5 space-y-2">
@@ -244,5 +240,4 @@
 		</div>
 	</div>
 
-	<AdBanner />
 </div>

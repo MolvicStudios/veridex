@@ -3,7 +3,6 @@
 	import AnalysisForm from '$lib/components/AnalysisForm.svelte';
 	import ResultPanel from '$lib/components/ResultPanel.svelte';
 	import NewsSection from '$lib/components/NewsSection.svelte';
-	import AdBanner from '$lib/components/AdBanner.svelte';
 	import { currentResult } from '$lib/stores.js';
 	import type { Lang } from '$lib/translations.js';
 	import { getT } from '$lib/translations.js';
@@ -147,17 +146,12 @@
 	</div>
 </div>
 
-<!-- Ad -->
-<div class="container-app"><AdBanner /></div>
-
 <!-- Result section -->
 {#if result}
 	<section id="result-section" class="container-app py-4 pb-12 fade-up">
 		<ResultPanel {result} {lang} {onNewAnalysis} />
 	</section>
 
-	<!-- Ad after result -->
-	<div class="container-app"><AdBanner /></div>
 {/if}
 
 <!-- News Research section -->
@@ -189,9 +183,6 @@
 		</div>
 	</div>
 </section>
-
-<!-- Ad after how it works -->
-<div class="container-app"><AdBanner /></div>
 
 <!-- About / Technology -->
 <section class="container-app py-14">
