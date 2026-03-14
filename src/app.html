@@ -167,6 +167,56 @@
 		    window.__uspapi = uspStubFunction;
 		    var uspInterval = setInterval(checkIfUspIsReady, 6000);
 		  }
+
+		  /* GPP (Global Privacy Platform) stub */
+		  (function() {
+		    if (typeof window.__gpp === 'function') return;
+		    var gppQueue = [];
+		    window.__gpp = function(cmd, cb, par) {
+		      if (cmd === 'ping') {
+		        if (typeof cb === 'function') {
+		          cb({
+		            gppVersion: '1.1',
+		            cmpStatus: 'stub',
+		            cmpDisplayStatus: 'hidden',
+		            signalStatus: 'not ready',
+		            supportedAPIs: [],
+		            cmpId: 0,
+		            sectionList: [],
+		            applicableSections: [-1],
+		            gppString: '',
+		            parsedSections: {}
+		          }, true);
+		        }
+		      } else {
+		        gppQueue.push([cmd, cb, par]);
+		      }
+		      return gppQueue;
+		    };
+		    window.__gpp.a = gppQueue;
+
+		    var GPP_LOCATOR = '__gppLocator';
+		    if (!window.frames[GPP_LOCATOR]) {
+		      if (document.body) {
+		        var f = document.createElement('iframe');
+		        f.style.cssText = 'display:none';
+		        f.name = GPP_LOCATOR;
+		        document.body.appendChild(f);
+		      }
+		    }
+
+		    window.addEventListener('message', function(e) {
+		      var json;
+		      try { json = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch(x) { return; }
+		      if (json && json.__gppCall) {
+		        var p = json.__gppCall;
+		        window.__gpp(p.command, function(retVal, success) {
+		          var msg = { __gppReturn: { returnValue: retVal, success: success, callId: p.callId } };
+		          if (e.source) e.source.postMessage(typeof e.data === 'string' ? JSON.stringify(msg) : msg, '*');
+		        }, p.parameter);
+		      }
+		    }, false);
+		  })();
 		})();
 		</script>
 		<!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.3) -->
