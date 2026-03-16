@@ -240,7 +240,7 @@ export const translations = {
 		},
 		disclaimer: 'Veridex es una herramienta de orientación. Los resultados son estimaciones basadas en IA y no constituyen una verificación periodística definitiva. Utiliza siempre el pensamiento crítico.',
 		cookie: {
-			message: 'Usamos cookies propias y de terceros para mejorar tu experiencia y mostrarte publicidad relevante. El consentimiento se gestiona mediante el banner de InMobi Choice.',
+			message: 'Usamos cookies técnicas esenciales para mejorar tu experiencia (tema, idioma y contador de análisis).',
 			accept: 'Aceptar todas', reject: 'Solo esenciales', learnMore: 'Más info'
 		},
 		footer: {
@@ -253,9 +253,9 @@ export const translations = {
 			sections: [
 				{ title: '1. Responsable del tratamiento', content: 'MolvicStudios.pro es el responsable del tratamiento de los datos. Contacto: molvicstudios@outlook.com' },
 				{ title: '2. Datos que recopilamos', content: 'Veridex no requiere registro ni recoge datos personales identificables. Los únicos datos procesados son el texto o URL que el usuario introduce voluntariamente para su análisis, los cuales son enviados a modelos de IA de terceros para generar el informe y no son almacenados en nuestros servidores.' },
-				{ title: '3. Uso de cookies', content: 'Usamos cookies técnicas esenciales para el funcionamiento del sitio (preferencias de tema e idioma, contador de análisis diarios). Con tu consentimiento, también usamos cookies de terceros de TheMoneyTizer para mostrar publicidad relevante. El consentimiento se gestiona mediante el banner GDPR de InMobi Choice. Consulta nuestra Política de Cookies para más detalle.' },
-				{ title: '4. Servicios de terceros', content: 'Para el análisis de contenido usamos las APIs de Groq Inc., Mistral AI, OpenAI, Google, Anthropic, xAI y DeepSeek. Para la publicidad usamos TheMoneyTizer. Para la extracción de URLs usamos el servicio público Jina Reader. Cada uno tiene su propia política de privacidad.' },
-				{ title: '5. Base legal del tratamiento', content: 'El tratamiento se basa en el interés legítimo del servicio (análisis solicitado por el usuario) y en el consentimiento explícito para las cookies no esenciales.' },
+				{ title: '3. Uso de cookies', content: 'Usamos cookies técnicas esenciales para el funcionamiento del sitio (preferencias de tema e idioma, contador de análisis diarios). No usamos cookies de publicidad ni de terceros.' },
+				{ title: '4. Servicios de terceros', content: 'Para el análisis de contenido usamos las APIs de Groq Inc., Mistral AI, OpenAI, Google, Anthropic, xAI y DeepSeek. Para la extracción de URLs usamos el servicio público Jina Reader. Cada uno tiene su propia política de privacidad.' },
+				{ title: '5. Base legal del tratamiento', content: 'El tratamiento se basa en el interés legítimo del servicio (análisis solicitado por el usuario).' },
 				{ title: '6. Transferencias internacionales', content: 'Los modelos de IA pueden procesar datos en servidores ubicados fuera del Espacio Económico Europeo. Estas transferencias están amparadas por cláusulas contractuales estándar.' },
 				{ title: '7. Derechos del usuario', content: 'Tienes derecho a acceder, rectificar, suprimir y portabilidad de tus datos, así como a oponerte o limitar su tratamiento. Para ejercerlos, contacta con nosotros en molvicstudios@outlook.com' },
 				{ title: '8. Cambios en esta política', content: 'Nos reservamos el derecho de modificar esta política. Los cambios se publicarán en esta página con la fecha de actualización.' }
@@ -268,8 +268,7 @@ export const translations = {
 			sections: [
 				{ title: '¿Qué son las cookies?', content: 'Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo para recordar preferencias y mejorar la experiencia de uso.' },
 				{ title: 'Cookies esenciales', content: 'Estas cookies son necesarias para el funcionamiento del sitio: preferencia de tema (oscuro/claro), idioma y contador de análisis diarios. No pueden desactivarse.' },
-				{ title: 'Cookies de publicidad (TheMoneyTizer)', content: 'Con tu consentimiento, TheMoneyTizer y sus socios usan cookies para mostrarte anuncios relevantes basados en tus intereses. El consentimiento se gestiona mediante el banner GDPR de InMobi Choice.' },
-				{ title: 'Cómo gestionar las cookies', content: 'Puedes configurar tu navegador para bloquear o eliminar cookies. Ten en cuenta que algunas funcionalidades del sitio podrían verse afectadas. Para revocar tu consentimiento, borra las cookies del sitio.' }
+				{ title: 'Cómo gestionar las cookies', content: 'Puedes configurar tu navegador para bloquear o eliminar cookies. Ten en cuenta que algunas funcionalidades del sitio podrían verse afectadas.' }
 			]
 		},
 		terms: {
@@ -524,7 +523,7 @@ export const translations = {
 		},
 		disclaimer: 'Veridex is a guidance tool. Results are AI-based estimates and do not constitute a definitive journalistic verification. Always use critical thinking.',
 		cookie: {
-			message: 'We use first- and third-party cookies to improve your experience and show relevant ads. Consent is managed via the InMobi Choice banner.',
+			message: 'We use essential technical cookies to improve your experience (theme, language and analysis counter).',
 			accept: 'Accept all', reject: 'Essential only', learnMore: 'Learn more'
 		},
 		footer: {
@@ -537,9 +536,9 @@ export const translations = {
 			sections: [
 				{ title: '1. Data controller', content: 'MolvicStudios.pro is the data controller. Contact: molvicstudios@outlook.com' },
 				{ title: '2. Data we collect', content: 'Veridex does not require registration or collect personally identifiable data. The only data processed is the text or URL voluntarily submitted by the user for analysis, which is sent to third-party AI models to generate the report and is not stored on our servers.' },
-				{ title: '3. Use of cookies', content: 'We use essential technical cookies for site functionality (theme preferences, language, daily analysis counter). With your consent, we also use third-party TheMoneyTizer cookies to display relevant advertising. Consent is managed via the InMobi Choice GDPR banner. See our Cookie Policy for details.' },
-				{ title: '4. Third-party services', content: 'For content analysis we use the APIs of Groq Inc., Mistral AI, OpenAI, Google, Anthropic, xAI and DeepSeek. For advertising we use TheMoneyTizer. For URL extraction we use the public Jina Reader service. Each has its own privacy policy.' },
-				{ title: '5. Legal basis', content: 'Processing is based on the legitimate interest of the service (analysis requested by the user) and explicit consent for non-essential cookies.' },
+				{ title: '3. Use of cookies', content: 'We use essential technical cookies for site functionality (theme preferences, language, daily analysis counter). We do not use advertising or third-party cookies.' },
+				{ title: '4. Third-party services', content: 'For content analysis we use the APIs of Groq Inc., Mistral AI, OpenAI, Google, Anthropic, xAI and DeepSeek. For URL extraction we use the public Jina Reader service. Each has its own privacy policy.' },
+				{ title: '5. Legal basis', content: 'Processing is based on the legitimate interest of the service (analysis requested by the user).' },
 				{ title: '6. International transfers', content: 'AI models may process data on servers located outside the European Economic Area. Such transfers are covered by standard contractual clauses.' },
 				{ title: '7. Your rights', content: 'You have the right to access, rectify, erase and obtain portability of your data, as well as to object or restrict its processing. To exercise these rights contact us at molvicstudios@outlook.com' },
 				{ title: '8. Changes', content: 'We reserve the right to modify this policy. Changes will be published on this page with the update date.' }
@@ -552,8 +551,7 @@ export const translations = {
 			sections: [
 				{ title: 'What are cookies?', content: 'Cookies are small text files stored on your device to remember preferences and improve the user experience.' },
 				{ title: 'Essential cookies', content: 'These cookies are necessary for the site to work: theme preference (dark/light), language and daily analysis counter. They cannot be disabled.' },
-				{ title: 'Advertising cookies (TheMoneyTizer)', content: 'With your consent, TheMoneyTizer and its partners use cookies to show you relevant ads based on your interests. Consent is managed via the InMobi Choice GDPR banner.' },
-				{ title: 'How to manage cookies', content: 'You can configure your browser to block or delete cookies. Note that some site features may be affected. To revoke your consent, clear the site cookies.' }
+				{ title: 'How to manage cookies', content: 'You can configure your browser to block or delete cookies. Note that some site features may be affected.' }
 			]
 		},
 		terms: {
