@@ -131,6 +131,7 @@
 
 			if (!hasOwnKey) dailyCount.increment();
 			onResult(result);
+			if (typeof window !== 'undefined' && window.molvicTrack) window.molvicTrack('news_verified');
 		} catch {
 			error = t.errors.analyzeError;
 		} finally {
