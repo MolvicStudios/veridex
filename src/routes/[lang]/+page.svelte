@@ -103,6 +103,8 @@
 	<link rel="alternate" hreflang="x-default" href="https://veridex.quest/es" />
 	<!-- JSON-LD structured data -->
 	{@html '<script type="application/ld+json">' + schema + '<\/script>'}
+	<!-- Ad script -->
+	<script async data-cfasync="false" src="https://pl28979910.profitablecpmratenetwork.com/65b699b804a870545d2cca607ac2a7f1/invoke.js"></script>
 </svelte:head>
 
 <!-- Hero section -->
@@ -183,6 +185,11 @@
 		</div>
 	</div>
 </section>
+
+<!-- Ad -->
+<div class="container-app py-6 flex justify-center">
+	<div id="container-65b699b804a870545d2cca607ac2a7f1"></div>
+</div>
 
 <!-- About / Technology -->
 <section class="container-app py-14">
