@@ -134,6 +134,9 @@
 	</div>
 </section>
 
+<!-- Adsterra Native Banner -->
+<div id="container-65b699b804a870545d2cca607ac2a7f1"></div>
+
 <!-- Trust stats -->
 <div class="border-y border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/30">
 	<div class="container-app">
